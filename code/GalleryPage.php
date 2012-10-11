@@ -12,8 +12,12 @@ class GalleryPage extends Page {
   public function getCMSFields() {
     $fields = parent::getCMSFields();
     
-    $field = new GridField('Images', 'Images', $this->Images(), GalleryPage_GridFieldConfig::create());
-    $fields->addFieldToTab('Root.Gallery', $field);
+    $fields->addFieldToTab('Root.Gallery', GridField::create(
+      'Images', 
+      'Images', 
+      $this->Images(), 
+      GalleryPage_GridFieldConfig::create()
+    ));
 
     return $fields;
   }
@@ -60,9 +64,18 @@ class GalleryPage_Image extends DataObject {
 
   public static $default_sort = 'SortOrder';
 
-  function SummaryOfImage() {
+  public function SummaryOfImage() {
     if ($Image = $this->Image()) return $Image->CMSThumbnail();
     else return '(No Image)';
+  }
+
+  public function getCMSFields() {
+    $fields = parent::getCMSFields();
+
+    $fields->removeByName('SortOrder');
+    $fields->replaceField('GalleryPageID', new HiddenField('GalleryPageID'));
+
+    return $fields;
   }
 }
 
