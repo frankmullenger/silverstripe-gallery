@@ -1,5 +1,8 @@
 <?php
 
+/**
+ * Gallery page for holding the gallery
+ */
 class GalleryPage extends Page {
 
   public static $has_many = array(
@@ -16,6 +19,9 @@ class GalleryPage extends Page {
   }
 }
 
+/**
+ * Gallery page controller for loading javascript
+ */
 class GalleryPage_Controller extends Page_Controller {
 
   public function init() {
@@ -29,6 +35,9 @@ class GalleryPage_Controller extends Page_Controller {
   }
 }
 
+/**
+ * DataObject that represents each gallery "item"
+ */
 class GalleryPage_Image extends DataObject {
 
   public static $plural_name = 'Gallery Images';
@@ -57,7 +66,11 @@ class GalleryPage_Image extends DataObject {
   }
 }
 
+/**
+ * Grid field config to customise detail form etc.
+ */
 class GalleryPage_GridFieldConfig extends GridFieldConfig {
+
   /**
    *
    * @param int $itemsPerPage - How many items per page should show up
@@ -86,6 +99,10 @@ class GalleryPage_GridFieldConfig extends GridFieldConfig {
   }
 }
 
+/**
+ * Detail form to save the record when first created before editing, allowing images 
+ * to be attached to the gallery item immediately.
+ */
 class GalleryPage_GridFieldDetailForm extends GridFieldDetailForm {
 
   public function handleItem($gridField, $request) {
@@ -112,7 +129,11 @@ class GalleryPage_GridFieldDetailForm extends GridFieldDetailForm {
   }
 }
 
-//Waiting for pull request to be accepted: https://github.com/silverstripe/sapphire/pull/852
+/**
+ * Simply to manage the return URL from the doDelete() action, unnecessary once this pull request is accepted:
+ * https://github.com/silverstripe/sapphire/pull/852
+ * http://open.silverstripe.org/ticket/7927
+ */
 class GalleryPage_GridFieldDetailForm_ItemRequest extends GridFieldDetailForm_ItemRequest {
 
   public function ItemEditForm() {
