@@ -17,10 +17,7 @@ Documentation
 -------------
 Very simple gallery solution to upload images and display them in a basic gallery using Fancybox. 
 
-Uses GridField to manage the images, circumvents the issue of requiring a record to exist before attaching an image by saving the record
-first when creating a new record - this approach is not ideal but acceptable in many cases.
-
-Ready for dropping in [SortableGridField](https://github.com/UndefinedOffset/SortableGridField) module.
+Uses customised UploadField to manage the images, allowing bulk upload of images then resorting using drag drop and editing of captions inline.
 
 You are required to [purchase a licence for Fancybox](http://fancyapps.com/fancybox/#license) for commercial websites.
 
