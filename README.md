@@ -26,6 +26,14 @@ Installation Instructions
 1. Place this directory in the root of your SilverStripe installation, rename the folder 'gallery'.
 2. Visit yoursite.com/dev/build?flush=1 to rebuild the database.
 
+Usage
+-----
+1. Create gallery page in the CMS
+2. Edit the gallery page and go to "Images" tab
+3. Drag images into the "Drop" area
+4. [Edit caption for images](http://i.imgur.com/h8EwN.png)
+5. [Drag and drop images to re-order them](http://i.imgur.com/vPrX3.png)
+
 Attribution
 -----------
 This extension uses:
