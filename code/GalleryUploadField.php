@@ -1,6 +1,8 @@
 <?php
 
 class GalleryUploadField extends UploadField {
+	
+	protected $templateFileEdit = 'GalleryUploadField_FileEdit';
 
 	protected $ufConfig = array(
 		/**
@@ -38,7 +40,7 @@ class GalleryUploadField extends UploadField {
 		 * @example 'getCMSFields'
 		 * @var FieldList|string
 		 */
-		'fileEditFields' => null,
+		'fileEditFields' => 'getUploadFields',
 		/**
 		 * FieldList $actions or string $name (of a method on File to provide a actions) for the EditForm
 		 * @example 'getCMSActions'
@@ -54,6 +56,7 @@ class GalleryUploadField extends UploadField {
 	);
 
 	public function Field($properties = array()) {
+
 		$record = $this->getRecord();
 		$name = $this->getName();
 
@@ -85,11 +88,11 @@ class GalleryUploadField extends UploadField {
 		));
 
 		Requirements::javascript(THIRDPARTY_DIR . '/jquery/jquery.js');
-		Requirements::javascript('gallery/javascript/GalleryUploadField.js');
+		// Requirements::javascript('gallery/javascript/GalleryUploadField.js');
 
 		Requirements::css(THIRDPARTY_DIR . '/jquery-ui-themes/smoothness/jquery-ui.css'); // TODO hmmm, remove it?
 		Requirements::css(FRAMEWORK_DIR . '/css/UploadField.css');
-		Requirements::css('gallery/css/GalleryUploadField.css');
+		// Requirements::css('gallery/css/GalleryUploadField.css');
 
 		$config = array(
 			'url' => $this->Link('upload'),
@@ -126,7 +129,7 @@ class GalleryUploadField extends UploadField {
 		if (is_numeric($config['maxNumberOfFiles']) && $this->getItems()->count()) {
 			$configOverwrite['maxNumberOfFiles'] = $config['maxNumberOfFiles'] - $this->getItems()->count();
 		}
-		
+
 		$config = array_merge($config, $this->ufConfig, $configOverwrite);
 
 		return $this->customise(array(
@@ -134,9 +137,9 @@ class GalleryUploadField extends UploadField {
 			'config' => new ArrayData($config),
 			'multiple' => $config['maxNumberOfFiles'] !== 1,
 			'displayInput' => (!isset($configOverwrite['maxNumberOfFiles']) || $configOverwrite['maxNumberOfFiles'])
-		))->renderWith('GalleryUploadField');
+		))->renderWith($this->getTemplates());
 	}
-
+	
 	public function getItemHandler($itemID) {
 		return GalleryUploadField_ItemHandler::create($this, $itemID);
 	}
@@ -144,29 +147,88 @@ class GalleryUploadField extends UploadField {
 	public function sort($request) {
 
 		$fileIDs = $request->postVar('ids');
+		
+		$record = $this->getRecord();
+		$relName = $this->getName();
+		$parentID = $record->ID;
+		list($parentClass, $componentClass, $parentField, $componentField, $table) = $record->many_many($relName);
 
 		if ($fileIDs && is_array($fileIDs)) foreach ($fileIDs as $order => $fileID) {
 			$newOrder = $order + 1;
-
-			//Get the file, set the sort order
-			$file = GalleryPage_Image::get()
-				->where("\"GalleryPage_Image\".\"ID\" = '{$fileID}'")
+			
+			$joinObj = $table::get()
+				->where("\"$parentField\" = '{$parentID}' AND \"$componentField\" = '{$fileID}'")
 				->first();
-
-			$file->SortOrder = $newOrder;
-			$file->write();
+				
+			$joinObj->SortOrder = $newOrder;
+			$joinObj->write();
 		}
 	}
-
 }
 
 class GalleryUploadField_ItemHandler extends UploadField_ItemHandler {
+	
+	public function EditForm() {
+		
+		$file = $this->getItem();
+		
+		if (is_a($this->parent->getConfig('fileEditFields'), 'FieldList')) {
+			$fields = $this->parent->getConfig('fileEditFields');
+		} elseif ($file->hasMethod($this->parent->getConfig('fileEditFields'))) {
+			$fields = $file->{$this->parent->getConfig('fileEditFields')}();
+		} else {
+			$fields = $file->getCMSFields();
+			// Only display main tab, to avoid overly complex interface
+			if($fields->hasTabSet() && $mainTab = $fields->findOrMakeTab('Root.Main')) $fields = $mainTab->Fields();
+		}
+		if (is_a($this->parent->getConfig('fileEditActions'), 'FieldList')) {
+			$actions = $this->parent->getConfig('fileEditActions');
+		} elseif ($file->hasMethod($this->parent->getConfig('fileEditActions'))) {
+			$actions = $file->{$this->parent->getConfig('fileEditActions')}();
+		} else {
+			$actions = new FieldList($saveAction = new FormAction('doEdit', _t('UploadField.DOEDIT', 'Save')));
+			$saveAction->addExtraClass('ss-ui-action-constructive icon-accept');
+		}
+		if (is_a($this->parent->getConfig('fileEditValidator'), 'Validator')) {
+			$validator = $this->parent->getConfig('fileEditValidator');
+		} elseif ($file->hasMethod($this->parent->getConfig('fileEditValidator'))) {
+			$validator = $file->{$this->parent->getConfig('fileEditValidator')}();
+		} else {
+			$validator = null;
+		}
+		$form = new Form(
+			$this,
+			__FUNCTION__, 
+			$fields,
+			$actions,
+			$validator
+		);
+		$form->loadDataFrom($file);
+		
+		//Get join object for populating caption
+		$controller = Controller::curr();
+		$parentID = $controller->currentPageID();
+  	$record = Page::get()
+  		->where("\"SiteTree\".\"ID\" = '$parentID'")
+  		->first();
 
-	public function getItem() {
-		return DataObject::get_by_id('GalleryPage_Image', $this->itemID);
+  	list($parentClass, $componentClass, $parentField, $componentField, $table) = $record->many_many('Images');
+
+		$joinObj = $table::get()
+				->where("\"$parentField\" = '{$parentID}' AND \"ImageID\" = '{$file->ID}'")
+				->first();
+
+		$data = array(
+			'Caption' => $joinObj->Caption	
+		);
+		$form->loadDataFrom($data);
+
+		$form->addExtraClass('small');
+		return $form;
 	}
 
-	public function edit(SS_HTTPRequest $request) {
+	public function doEdit(array $data, Form $form, SS_HTTPRequest $request) {
+
 		// Check form field state
 		if($this->parent->isDisabled() || $this->parent->isReadonly()) return $this->httpError(403);
 
@@ -178,65 +240,21 @@ class GalleryUploadField_ItemHandler extends UploadField_ItemHandler {
 		// Only allow actions on files in the managed relation (if one exists)
 		$items = $this->parent->getItems();
 		if($this->parent->managesRelation() && !$items->byID($item->ID)) return $this->httpError(403);
-
-		Requirements::css(FRAMEWORK_DIR . '/css/UploadField.css');
-
-		return $this->customise(array(
-			'Form' => $this->EditForm()
-		))->renderWith($this->parent->getTemplateFileEdit());
-	}
-
-	public function EditForm() {
-
-		$file = $this->getItem();
-
-		//Fields
-		if (is_a($this->parent->getConfig('fileEditFields'), 'FieldList')) {
-			$fields = $this->parent->getConfig('fileEditFields');
-		} 
-		elseif ($file->hasMethod($this->parent->getConfig('fileEditFields'))) {
-			$fields = $file->{$this->parent->getConfig('fileEditFields')}();
-		} 
-		else {
-			$fields = $file->getCMSFields();
-			// Only display main tab, to avoid overly complex interface
-			if($fields->hasTabSet() && $mainTab = $fields->findOrMakeTab('Root.Main')) $fields = $mainTab->Fields();
-		}
-
-		//Actions
-		if (is_a($this->parent->getConfig('fileEditActions'), 'FieldList')) {
-			$actions = $this->parent->getConfig('fileEditActions');
-		} 
-		elseif ($file->hasMethod($this->parent->getConfig('fileEditActions'))) {
-			$actions = $file->{$this->parent->getConfig('fileEditActions')}();
-		} 
-		else {
-			$actions = new FieldList($saveAction = new FormAction('doEdit', _t('UploadField.DOEDIT', 'Save')));
-			$saveAction->addExtraClass('ss-ui-action-constructive icon-accept');
-		}
-
-		//Validator
-		if (is_a($this->parent->getConfig('fileEditValidator'), 'Validator')) {
-			$validator = $this->parent->getConfig('fileEditValidator');
-		} 
-		elseif ($file->hasMethod($this->parent->getConfig('fileEditValidator'))) {
-			$validator = $file->{$this->parent->getConfig('fileEditValidator')}();
-		} 
-		else {
-			$validator = null;
-		}
-
-		$form = new Form(
-			$this,
-			__FUNCTION__, 
-			$fields,
-			$actions,
-			$validator
-		);
-		$form->loadDataFrom($file);
-		$form->addExtraClass('small');
 		
-		Requirements::css('gallery/css/GalleryUploadField.css');
-		return $form;
+		$record = $this->parent->getRecord();
+		$relName = $this->parent->getName();
+		$parentID = $record->ID;
+		list($parentClass, $componentClass, $parentField, $componentField, $table) = $record->many_many($relName);
+
+		$joinObj = $table::get()
+				->where("\"$parentField\" = '{$parentID}' AND \"$componentField\" = '{$item->ID}'")
+				->first();
+
+		$form->saveInto($joinObj);
+		$joinObj->write();
+
+		$form->sessionMessage(_t('UploadField.Saved', 'Saved'), 'good');
+
+		return $this->edit($request);
 	}
 }
