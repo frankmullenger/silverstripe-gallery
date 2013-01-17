@@ -20,7 +20,7 @@
 						$.post(
 							config['urlSort'], 
 							{'ids' : ids}
-						)
+						);
 					}
 				});
 				

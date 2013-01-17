@@ -171,6 +171,30 @@ class GalleryUploadField extends UploadField {
 			$joinObj->write();
 		}
 	}
+	
+	protected function attachFile($file) {
+
+		$record = $this->getRecord();
+		$name = $this->getName();
+		if ($record && $record->exists()) {
+			if ($record->has_many($name) || $record->many_many($name)) {
+				if(!$record->isInDB()) $record->write();
+
+				//Set the sort order first time image is attached
+				$top = GalleryPage_Images::get()
+					->where("\"GalleryPageID\" = '{$record->ID}'")
+					->max('SortOrder');
+
+				$top = (is_numeric($top)) ? $top + 1 : 1;
+
+				$record->{$name}()->add($file, array('SortOrder' => $top));
+				
+			} elseif($record->has_one($name)) {
+				$record->{$name . 'ID'} = $file->ID;
+				$record->write();
+			}
+		}
+	}
 }
 
 class GalleryUploadField_ItemHandler extends UploadField_ItemHandler {
@@ -265,4 +289,5 @@ class GalleryUploadField_ItemHandler extends UploadField_ItemHandler {
 
 		return $this->edit($request);
 	}
+	
 }
