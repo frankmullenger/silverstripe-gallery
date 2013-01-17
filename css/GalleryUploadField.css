@@ -85,27 +85,23 @@
 	border-bottom: 1px solid #ccc;
 }
 
-
-.productimageupload-iframe .composite {
-}
-
-.productimageupload-iframe label {
+.galleryupload-iframe label {
 	padding: 0;
 }
 
-.productimageupload-iframe form.small .field textarea {
-	width: 350px;
+.galleryupload-iframe form.small .field textarea {
+	width: 200px;
 }
 
-.productimageupload-iframe .cms-file-info {
+.galleryupload-iframe .cms-file-info {
 	border-bottom: none;
 }
 
-.productimageupload-iframe .ui-tabs-nav {
+.galleryupload-iframe .ui-tabs-nav {
 	display: none;
 }
 
-.productimageupload-iframe .ui-tabs .ui-tabs-nav ~ .ui-tabs-panel {
+.galleryupload-iframe .ui-tabs .ui-tabs-nav ~ .ui-tabs-panel {
 	border: none;
 }
 

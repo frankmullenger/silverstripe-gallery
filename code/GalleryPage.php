@@ -6,28 +6,18 @@ class GalleryPage extends Page {
   );
   
   public function Images() {
-
-  	$all = new ArrayList();
-  	
-  	$images = Image::get()
-  		->innerJoin(
-  			'GalleryPage_Images', 
-  			"\"GalleryPage_Images\".\"ImageID\" = \"File\".\"ID\""
-  		)
-  		->where("\"GalleryPage_Images\".\"GalleryPageID\" = '{$this->ID}'")
-  		->sort("\"GalleryPage_Images\".\"SortOrder\" ASC");
-
+  	return $this->getManyManyComponents(
+  		'Images',
+  		'',
+  		"\"GalleryPage_Images\".\"SortOrder\" ASC"
+  	);
+  }
+  
+  public function ImagesCaptions() {
   	$captions = GalleryPage_Images::get()
-  			->where("\"GalleryPageID\" = '{$this->ID}'")
-  			->map('ImageID', 'Caption')
-  			->toArray();
-
-  	foreach ($images as $image) {
-  		$image->Caption = $captions[$image->ID];
-  		$all->push($image);
-  	}
-  		
-  	return $all;
+			->where("\"GalleryPageID\" = '{$this->ID}'")
+			->map('ImageID', 'Caption')
+			->toArray();
   }
 
   public function getCMSFields() {
@@ -78,6 +68,19 @@ class GalleryPage_ImageExtension extends DataExtension {
   		'Dimensions'
   	));
   	return $fields;
+  }
+  
+  public function Caption() {
+
+  	//TODO: Make this more generic and not require a db query each time
+  	$controller = Controller::curr();
+		$page = $controller->data();
+
+  	$joinObj = GalleryPage_Images::get()
+			->where("\"GalleryPageID\" = '{$page->ID}' AND \"ImageID\" = '{$this->owner->ID}'")
+			->first();
+			
+		return $joinObj->Caption;
   }
   
 }

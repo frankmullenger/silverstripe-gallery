@@ -160,6 +160,13 @@ class GalleryUploadField extends UploadField {
 				->where("\"$parentField\" = '{$parentID}' AND \"$componentField\" = '{$fileID}'")
 				->first();
 				
+			if (!$joinObj || !$joinObj->exists()) {
+				$joinObj = GalleryPage_Images::create();
+				$joinObj->$parentField = $parentID;
+				$joinObj->$componentField = $fileID;
+				$joinObj->write();
+			}
+				
 			$joinObj->SortOrder = $newOrder;
 			$joinObj->write();
 		}
@@ -241,6 +248,7 @@ class GalleryUploadField_ItemHandler extends UploadField_ItemHandler {
 		$items = $this->parent->getItems();
 		if($this->parent->managesRelation() && !$items->byID($item->ID)) return $this->httpError(403);
 		
+		//Get join to save the caption onto it
 		$record = $this->parent->getRecord();
 		$relName = $this->parent->getName();
 		$parentID = $record->ID;
