@@ -202,8 +202,10 @@ class GalleryUploadField_ItemHandler extends UploadField_ItemHandler {
 	public function EditForm() {
 		
 		$file = $this->getItem();
-		
-		if (is_a($this->parent->getConfig('fileEditFields'), 'FieldList')) {
+
+		if ($file->hasMethod('getUploadFields')) {
+			$fields = $file->getUploadFields();
+		} elseif (is_a($this->parent->getConfig('fileEditFields'), 'FieldList')) {
 			$fields = $this->parent->getConfig('fileEditFields');
 		} elseif ($file->hasMethod($this->parent->getConfig('fileEditFields'))) {
 			$fields = $file->{$this->parent->getConfig('fileEditFields')}();
