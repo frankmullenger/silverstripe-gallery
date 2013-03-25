@@ -128,10 +128,6 @@
       height: 100%;
       z-index: 10;
     }
-    /* IE 6 doesn't like height: 100% */
-    * html .ad-gallery .ad-forward, .ad-gallery .ad-back {
-      height: 100px;
-    }
     .ad-gallery .ad-back {
       cursor: pointer;
       left: -20px;
