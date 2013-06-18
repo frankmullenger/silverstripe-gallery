@@ -15,7 +15,8 @@
 		"issues": "http://github.com/i-lateral/silverstripe-gallery/issues"
 	},
 	"require": {
-		"silverstripe/framework": ">=3.0"
+		"silverstripe/framework": ">=3.0",
+		"silverstripe/cms": ">=3.0"
 	},
 	"extra": {
 		"installer-name": "gallery"
