@@ -1,11 +1,11 @@
 <?php
 
 class GalleryImage extends DataExtension {
-    public static $db = array(
+    private static $db = array(
         'Sort'  => 'Int'
     );
 
-    public static $belogs_many_many = array(
+    private static $belogs_many_many = array(
         'Gallery'   => 'GalleryPage'
     );
     
