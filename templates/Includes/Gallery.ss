@@ -8,8 +8,12 @@
             <div class="ad-thumbs">
                 <ul class="ad-thumb-list">
                     <% loop $Images %><li>
-                        <a href="$Link">
-                            <img src="$CroppedImage(60,60).Link" <% if not Top.HideDescription %>alt="$Title"<% end_if %> class="image{$Pos}">
+                        <a href="$GalleryImage.Link">
+                            <img
+                                src="$GalleryThumbnail.Link"
+                                <% if not Top.HideDescription %>alt="$Title"<% end_if %>
+                                class="image{$Pos}"
+                            >
                         </a>
                     </li><% end_loop %>
                 </ul>
