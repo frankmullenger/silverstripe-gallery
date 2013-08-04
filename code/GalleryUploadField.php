@@ -141,7 +141,8 @@ class GalleryUploadField extends UploadField {
 	}
 	
 	public function getItemHandler($itemID) {
-		return GalleryUploadField_ItemHandler::create($this, $itemID);
+		$parentPage = $this->getRecord();
+		return GalleryUploadField_ItemHandler::create($this, $itemID, $parentPage->ID);
 	}
 
 	public function sort($request) {
@@ -199,6 +200,20 @@ class GalleryUploadField extends UploadField {
 
 class GalleryUploadField_ItemHandler extends UploadField_ItemHandler {
 	
+	protected $pageID;
+	/**
+	 * @param UploadFIeld $parent
+	 * @param int $item
+	 * @param int $pageID
+	 */
+	public function __construct($parent, $itemID, $pageID) {
+	    $this->parent = $parent;
+	    $this->itemID = $itemID;
+	    $this->pageID = $pageID;
+	
+	    parent::__construct($parent, $itemID);
+	}
+	
 	public function EditForm() {
 		
 		$file = $this->getItem();
@@ -239,8 +254,7 @@ class GalleryUploadField_ItemHandler extends UploadField_ItemHandler {
 		$form->loadDataFrom($file);
 		
 		//Get join object for populating caption
-		$controller = Controller::curr();
-		$parentID = $controller->currentPageID();
+		$parentID = $this->pageID;
   	$record = Page::get()
   		->where("\"SiteTree\".\"ID\" = '$parentID'")
   		->first();
