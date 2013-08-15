@@ -196,6 +196,21 @@ class GalleryUploadField extends UploadField {
 			}
 		}
 	}
+	
+	/**
+	* Determines if the underlying record (if any) has a relationship
+	* matching the field name. Important for permission control.
+	* 
+	* @return boolean
+	*/
+	public function managesRelation() {
+		$record = $this->getRecord();
+		$fieldName = $this->getName();
+		return (
+			$record 
+			&& ($record->has_one($fieldName) || $record->has_many($fieldName) || $record->many_many($fieldName))
+		);
+	}
 }
 
 class GalleryUploadField_ItemHandler extends UploadField_ItemHandler {

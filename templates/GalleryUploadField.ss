@@ -61,8 +61,8 @@
 
 
 <ul class="ss-uploadfield-files galleryfield-files files">
-	<% if $Items %>
-		<% loop $Items %>
+	<% if $CustomisedItems %>
+		<% loop $CustomisedItems %>
 			<li class="ss-uploadfield-item template-download" data-fileid="$ID">
 
 				<div class="ss-uploadfield-item-preview preview">
@@ -72,7 +72,7 @@
 				</div>
 
 				<div class="ss-uploadfield-item-info">
-
+					<input type='hidden' value='$ID' name='{$Top.Name}[Files][]' />
 					<label class="ss-uploadfield-item-name">
 						<b>{$Title}.{$Extension}</b>
 						<span>$Size</span>
