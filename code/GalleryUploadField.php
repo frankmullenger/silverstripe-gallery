@@ -99,8 +99,10 @@ class GalleryUploadField extends UploadField {
 			'urlSelectDialog' => $this->Link('select'),
 			'urlAttach' => $this->Link('attach'),
 			'urlSort' => $this->Link('sort'),
+			'urlFileExists' => $this->link('fileexists'),
 			'acceptFileTypes' => '.+$',
-			'maxNumberOfFiles' => $this->getConfig('allowedMaxFileNumber')
+			// Fileupload treats maxNumberOfFiles as the max number of _additional_ items allowed
+			'maxNumberOfFiles' => $allowedMaxFileNumber ? ($allowedMaxFileNumber - count($this->getItemIDs())) : null
 		);
 		if (count($this->getValidator()->getAllowedExtensions())) {
 			$allowedExtensions = $this->getValidator()->getAllowedExtensions();
