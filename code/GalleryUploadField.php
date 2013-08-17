@@ -2,6 +2,15 @@
 
 class GalleryUploadField extends UploadField {
 	
+	private static $allowed_actions = array(
+		'upload',
+		'attach',
+		'handleItem',
+		'handleSelect',
+		'fileexists',
+		'sort'
+	);
+	
 	protected $templateFileEdit = 'GalleryUploadField_FileEdit';
 
 	protected $ufConfig = array(
@@ -230,6 +239,12 @@ class GalleryUploadField_ItemHandler extends UploadField_ItemHandler {
 	
 	    parent::__construct($parent, $itemID);
 	}
+	
+	private static $allowed_actions = array(
+		'EditForm',
+		'doEdit',
+		'admin'
+	);
 	
 	public function EditForm() {
 		
