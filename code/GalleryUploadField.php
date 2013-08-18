@@ -2,6 +2,15 @@
 
 class GalleryUploadField extends UploadField {
 	
+	private static $allowed_actions = array(
+		'upload',
+		'attach',
+		'handleItem',
+		'handleSelect',
+		'fileexists',
+		'sort'
+	);
+	
 	protected $templateFileEdit = 'GalleryUploadField_FileEdit';
 
 	protected $ufConfig = array(
@@ -99,8 +108,10 @@ class GalleryUploadField extends UploadField {
 			'urlSelectDialog' => $this->Link('select'),
 			'urlAttach' => $this->Link('attach'),
 			'urlSort' => $this->Link('sort'),
+			'urlFileExists' => $this->link('fileexists'),
 			'acceptFileTypes' => '.+$',
-			'maxNumberOfFiles' => $this->getConfig('allowedMaxFileNumber')
+			// Fileupload treats maxNumberOfFiles as the max number of _additional_ items allowed
+			'maxNumberOfFiles' => $allowedMaxFileNumber ? ($allowedMaxFileNumber - count($this->getItemIDs())) : null
 		);
 		if (count($this->getValidator()->getAllowedExtensions())) {
 			$allowedExtensions = $this->getValidator()->getAllowedExtensions();
@@ -228,6 +239,12 @@ class GalleryUploadField_ItemHandler extends UploadField_ItemHandler {
 	
 	    parent::__construct($parent, $itemID);
 	}
+	
+	private static $allowed_actions = array(
+		'EditForm',
+		'doEdit',
+		'admin'
+	);
 	
 	public function EditForm() {
 		

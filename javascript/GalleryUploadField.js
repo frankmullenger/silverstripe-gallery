@@ -10,8 +10,13 @@
 					axis: 'y',
 					update: function(event, ui) {
 
-						var ids = new Array(),
+						if(event.type == "sortupdate") {
+							ids = new Array(),
 								config = $.parseJSON($('div.galleryupload input').data('config').replace(/'/g,'"'));
+						} else {
+							ids = new Array(),
+								config = $.parseJSON(fileInput.data('config').replace(/'/g,'"'));
+						}
 
 						$('.galleryfield-files .ss-uploadfield-item').each(function(){
 							ids.push($(this).attr('data-fileid'));
