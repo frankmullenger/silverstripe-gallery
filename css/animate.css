@@ -13,23 +13,23 @@ THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLI
 
 .animated {
 	-webkit-animation: 1s ease;
-	   -moz-animation: 1s ease;
-	    -ms-animation: 1s ease;
-	     -o-animation: 1s ease;
-	        animation: 1s ease;
+		 -moz-animation: 1s ease;
+			-ms-animation: 1s ease;
+			 -o-animation: 1s ease;
+					animation: 1s ease;
 	-webkit-animation-fill-mode: both;
-	   -moz-animation-fill-mode: both;
-	    -ms-animation-fill-mode: both;
-	     -o-animation-fill-mode: both;
-	        animation-fill-mode: both;
+		 -moz-animation-fill-mode: both;
+			-ms-animation-fill-mode: both;
+			 -o-animation-fill-mode: both;
+					animation-fill-mode: both;
 }
 
 .animated.hinge {
 	-webkit-animation: 2s ease;
-	   -moz-animation: 2s ease;
-	    -ms-animation: 2s ease;
-	     -o-animation: 2s ease;
-	        animation: 2s ease;
+		 -moz-animation: 2s ease;
+			-ms-animation: 2s ease;
+			 -o-animation: 2s ease;
+					animation: 2s ease;
 }
 
 @-webkit-keyframes flash {
@@ -240,53 +240,53 @@ THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLI
 /* originally authored by Nick Pettit - https://github.com/nickpettit/glide */
 
 @-webkit-keyframes wobble {
-  0% { -webkit-transform: translateX(0%); }
-  15% { -webkit-transform: translateX(-25%) rotate(-5deg); }
-  30% { -webkit-transform: translateX(20%) rotate(3deg); }
-  45% { -webkit-transform: translateX(-15%) rotate(-3deg); }
-  60% { -webkit-transform: translateX(10%) rotate(2deg); }
-  75% { -webkit-transform: translateX(-5%) rotate(-1deg); }
-  100% { -webkit-transform: translateX(0%); }
+	0% { -webkit-transform: translateX(0%); }
+	15% { -webkit-transform: translateX(-25%) rotate(-5deg); }
+	30% { -webkit-transform: translateX(20%) rotate(3deg); }
+	45% { -webkit-transform: translateX(-15%) rotate(-3deg); }
+	60% { -webkit-transform: translateX(10%) rotate(2deg); }
+	75% { -webkit-transform: translateX(-5%) rotate(-1deg); }
+	100% { -webkit-transform: translateX(0%); }
 }
 
 @-moz-keyframes wobble {
-  0% { -moz-transform: translateX(0%); }
-  15% { -moz-transform: translateX(-25%) rotate(-5deg); }
-  30% { -moz-transform: translateX(20%) rotate(3deg); }
-  45% { -moz-transform: translateX(-15%) rotate(-3deg); }
-  60% { -moz-transform: translateX(10%) rotate(2deg); }
-  75% { -moz-transform: translateX(-5%) rotate(-1deg); }
-  100% { -moz-transform: translateX(0%); }
+	0% { -moz-transform: translateX(0%); }
+	15% { -moz-transform: translateX(-25%) rotate(-5deg); }
+	30% { -moz-transform: translateX(20%) rotate(3deg); }
+	45% { -moz-transform: translateX(-15%) rotate(-3deg); }
+	60% { -moz-transform: translateX(10%) rotate(2deg); }
+	75% { -moz-transform: translateX(-5%) rotate(-1deg); }
+	100% { -moz-transform: translateX(0%); }
 }
 
 @-ms-keyframes wobble {
-  0% { -ms-transform: translateX(0%); }
-  15% { -ms-transform: translateX(-25%) rotate(-5deg); }
-  30% { -ms-transform: translateX(20%) rotate(3deg); }
-  45% { -ms-transform: translateX(-15%) rotate(-3deg); }
-  60% { -ms-transform: translateX(10%) rotate(2deg); }
-  75% { -ms-transform: translateX(-5%) rotate(-1deg); }
-  100% { -ms-transform: translateX(0%); }
+	0% { -ms-transform: translateX(0%); }
+	15% { -ms-transform: translateX(-25%) rotate(-5deg); }
+	30% { -ms-transform: translateX(20%) rotate(3deg); }
+	45% { -ms-transform: translateX(-15%) rotate(-3deg); }
+	60% { -ms-transform: translateX(10%) rotate(2deg); }
+	75% { -ms-transform: translateX(-5%) rotate(-1deg); }
+	100% { -ms-transform: translateX(0%); }
 }
 
 @-o-keyframes wobble {
-  0% { -o-transform: translateX(0%); }
-  15% { -o-transform: translateX(-25%) rotate(-5deg); }
-  30% { -o-transform: translateX(20%) rotate(3deg); }
-  45% { -o-transform: translateX(-15%) rotate(-3deg); }
-  60% { -o-transform: translateX(10%) rotate(2deg); }
-  75% { -o-transform: translateX(-5%) rotate(-1deg); }
-  100% { -o-transform: translateX(0%); }
+	0% { -o-transform: translateX(0%); }
+	15% { -o-transform: translateX(-25%) rotate(-5deg); }
+	30% { -o-transform: translateX(20%) rotate(3deg); }
+	45% { -o-transform: translateX(-15%) rotate(-3deg); }
+	60% { -o-transform: translateX(10%) rotate(2deg); }
+	75% { -o-transform: translateX(-5%) rotate(-1deg); }
+	100% { -o-transform: translateX(0%); }
 }
 
 @keyframes wobble {
-  0% { transform: translateX(0%); }
-  15% { transform: translateX(-25%) rotate(-5deg); }
-  30% { transform: translateX(20%) rotate(3deg); }
-  45% { transform: translateX(-15%) rotate(-3deg); }
-  60% { transform: translateX(10%) rotate(2deg); }
-  75% { transform: translateX(-5%) rotate(-1deg); }
-  100% { transform: translateX(0%); }
+	0% { transform: translateX(0%); }
+	15% { transform: translateX(-25%) rotate(-5deg); }
+	30% { transform: translateX(20%) rotate(3deg); }
+	45% { transform: translateX(-15%) rotate(-3deg); }
+	60% { transform: translateX(10%) rotate(2deg); }
+	75% { transform: translateX(-5%) rotate(-1deg); }
+	100% { transform: translateX(0%); }
 }
 
 .wobble {
@@ -299,29 +299,29 @@ THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLI
 /* originally authored by Nick Pettit - https://github.com/nickpettit/glide */
 
 @-webkit-keyframes pulse {
-    0% { -webkit-transform: scale(1); }	
+		0% { -webkit-transform: scale(1); }	
 	50% { -webkit-transform: scale(1.1); }
-    100% { -webkit-transform: scale(1); }
+		100% { -webkit-transform: scale(1); }
 }
 @-moz-keyframes pulse {
-    0% { -moz-transform: scale(1); }	
+		0% { -moz-transform: scale(1); }	
 	50% { -moz-transform: scale(1.1); }
-    100% { -moz-transform: scale(1); }
+		100% { -moz-transform: scale(1); }
 }
 @-ms-keyframes pulse {
-    0% { -ms-transform: scale(1); }	
+		0% { -ms-transform: scale(1); }	
 	50% { -ms-transform: scale(1.1); }
-    100% { -ms-transform: scale(1); }
+		100% { -ms-transform: scale(1); }
 }
 @-o-keyframes pulse {
-    0% { -o-transform: scale(1); }	
+		0% { -o-transform: scale(1); }	
 	50% { -o-transform: scale(1.1); }
-    100% { -o-transform: scale(1); }
+		100% { -o-transform: scale(1); }
 }
 @keyframes pulse {
-    0% { transform: scale(1); }	
+		0% { transform: scale(1); }	
 	50% { transform: scale(1.1); }
-    100% { transform: scale(1); }
+		100% { transform: scale(1); }
 }
 
 .pulse {
@@ -455,99 +455,99 @@ THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLI
 	animation-name: flip;
 }
 @-webkit-keyframes flipInX {
-    0% {
-        -webkit-transform: perspective(400px) rotateX(90deg);
-        opacity: 0;
-    }
-    
-    40% {
-        -webkit-transform: perspective(400px) rotateX(-10deg);
-    }
-    
-    70% {
-        -webkit-transform: perspective(400px) rotateX(10deg);
-    }
-    
-    100% {
-        -webkit-transform: perspective(400px) rotateX(0deg);
-        opacity: 1;
-    }
+		0% {
+				-webkit-transform: perspective(400px) rotateX(90deg);
+				opacity: 0;
+		}
+		
+		40% {
+				-webkit-transform: perspective(400px) rotateX(-10deg);
+		}
+		
+		70% {
+				-webkit-transform: perspective(400px) rotateX(10deg);
+		}
+		
+		100% {
+				-webkit-transform: perspective(400px) rotateX(0deg);
+				opacity: 1;
+		}
 }
 @-moz-keyframes flipInX {
-    0% {
-        -moz-transform: perspective(400px) rotateX(90deg);
-        opacity: 0;
-    }
-    
-    40% {
-        -moz-transform: perspective(400px) rotateX(-10deg);
-    }
-    
-    70% {
-        -moz-transform: perspective(400px) rotateX(10deg);
-    }
-    
-    100% {
-        -moz-transform: perspective(400px) rotateX(0deg);
-        opacity: 1;
-    }
+		0% {
+				-moz-transform: perspective(400px) rotateX(90deg);
+				opacity: 0;
+		}
+		
+		40% {
+				-moz-transform: perspective(400px) rotateX(-10deg);
+		}
+		
+		70% {
+				-moz-transform: perspective(400px) rotateX(10deg);
+		}
+		
+		100% {
+				-moz-transform: perspective(400px) rotateX(0deg);
+				opacity: 1;
+		}
 }
 @-ms-keyframes flipInX {
-    0% {
-        -ms-transform: perspective(400px) rotateX(90deg);
-        opacity: 0;
-    }
-    
-    40% {
-        -ms-transform: perspective(400px) rotateX(-10deg);
-    }
-    
-    70% {
-        -ms-transform: perspective(400px) rotateX(10deg);
-    }
-    
-    100% {
-        -ms-transform: perspective(400px) rotateX(0deg);
-        opacity: 1;
-    }
+		0% {
+				-ms-transform: perspective(400px) rotateX(90deg);
+				opacity: 0;
+		}
+		
+		40% {
+				-ms-transform: perspective(400px) rotateX(-10deg);
+		}
+		
+		70% {
+				-ms-transform: perspective(400px) rotateX(10deg);
+		}
+		
+		100% {
+				-ms-transform: perspective(400px) rotateX(0deg);
+				opacity: 1;
+		}
 }
 @-o-keyframes flipInX {
-    0% {
-        -o-transform: perspective(400px) rotateX(90deg);
-        opacity: 0;
-    }
-    
-    40% {
-        -o-transform: perspective(400px) rotateX(-10deg);
-    }
-    
-    70% {
-        -o-transform: perspective(400px) rotateX(10deg);
-    }
-    
-    100% {
-        -o-transform: perspective(400px) rotateX(0deg);
-        opacity: 1;
-    }
+		0% {
+				-o-transform: perspective(400px) rotateX(90deg);
+				opacity: 0;
+		}
+		
+		40% {
+				-o-transform: perspective(400px) rotateX(-10deg);
+		}
+		
+		70% {
+				-o-transform: perspective(400px) rotateX(10deg);
+		}
+		
+		100% {
+				-o-transform: perspective(400px) rotateX(0deg);
+				opacity: 1;
+		}
 }
 @keyframes flipInX {
-    0% {
-        transform: perspective(400px) rotateX(90deg);
-        opacity: 0;
-    }
-    
-    40% {
-        transform: perspective(400px) rotateX(-10deg);
-    }
-    
-    70% {
-        transform: perspective(400px) rotateX(10deg);
-    }
-    
-    100% {
-        transform: perspective(400px) rotateX(0deg);
-        opacity: 1;
-    }
+		0% {
+				transform: perspective(400px) rotateX(90deg);
+				opacity: 0;
+		}
+		
+		40% {
+				transform: perspective(400px) rotateX(-10deg);
+		}
+		
+		70% {
+				transform: perspective(400px) rotateX(10deg);
+		}
+		
+		100% {
+				transform: perspective(400px) rotateX(0deg);
+				opacity: 1;
+		}
 }
 
 .flipInX {
@@ -563,58 +563,58 @@ THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLI
 	animation-name: flipInX;
 }
 @-webkit-keyframes flipOutX {
-    0% {
-        -webkit-transform: perspective(400px) rotateX(0deg);
-        opacity: 1;
-    }
+		0% {
+				-webkit-transform: perspective(400px) rotateX(0deg);
+				opacity: 1;
+		}
 	100% {
-        -webkit-transform: perspective(400px) rotateX(90deg);
-        opacity: 0;
-    }
+				-webkit-transform: perspective(400px) rotateX(90deg);
+				opacity: 0;
+		}
 }
 
 @-moz-keyframes flipOutX {
-    0% {
-        -moz-transform: perspective(400px) rotateX(0deg);
-        opacity: 1;
-    }
+		0% {
+				-moz-transform: perspective(400px) rotateX(0deg);
+				opacity: 1;
+		}
 	100% {
-        -moz-transform: perspective(400px) rotateX(90deg);
-        opacity: 0;
-    }
+				-moz-transform: perspective(400px) rotateX(90deg);
+				opacity: 0;
+		}
 }
 
 @-ms-keyframes flipOutX {
-    0% {
-        -ms-transform: perspective(400px) rotateX(0deg);
-        opacity: 1;
-    }
+		0% {
+				-ms-transform: perspective(400px) rotateX(0deg);
+				opacity: 1;
+		}
 	100% {
-        -ms-transform: perspective(400px) rotateX(90deg);
-        opacity: 0;
-    }
+				-ms-transform: perspective(400px) rotateX(90deg);
+				opacity: 0;
+		}
 }
 
 @-o-keyframes flipOutX {
-    0% {
-        -o-transform: perspective(400px) rotateX(0deg);
-        opacity: 1;
-    }
+		0% {
+				-o-transform: perspective(400px) rotateX(0deg);
+				opacity: 1;
+		}
 	100% {
-        -o-transform: perspective(400px) rotateX(90deg);
-        opacity: 0;
-    }
+				-o-transform: perspective(400px) rotateX(90deg);
+				opacity: 0;
+		}
 }
 
 @keyframes flipOutX {
-    0% {
-        transform: perspective(400px) rotateX(0deg);
-        opacity: 1;
-    }
+		0% {
+				transform: perspective(400px) rotateX(0deg);
+				opacity: 1;
+		}
 	100% {
-        transform: perspective(400px) rotateX(90deg);
-        opacity: 0;
-    }
+				transform: perspective(400px) rotateX(90deg);
+				opacity: 0;
+		}
 }
 
 .flipOutX {
@@ -630,99 +630,99 @@ THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLI
 	backface-visibility: visible !important;
 }
 @-webkit-keyframes flipInY {
-    0% {
-        -webkit-transform: perspective(400px) rotateY(90deg);
-        opacity: 0;
-    }
-    
-    40% {
-        -webkit-transform: perspective(400px) rotateY(-10deg);
-    }
-    
-    70% {
-        -webkit-transform: perspective(400px) rotateY(10deg);
-    }
-    
-    100% {
-        -webkit-transform: perspective(400px) rotateY(0deg);
-        opacity: 1;
-    }
+		0% {
+				-webkit-transform: perspective(400px) rotateY(90deg);
+				opacity: 0;
+		}
+		
+		40% {
+				-webkit-transform: perspective(400px) rotateY(-10deg);
+		}
+		
+		70% {
+				-webkit-transform: perspective(400px) rotateY(10deg);
+		}
+		
+		100% {
+				-webkit-transform: perspective(400px) rotateY(0deg);
+				opacity: 1;
+		}
 }
 @-moz-keyframes flipInY {
-    0% {
-        -moz-transform: perspective(400px) rotateY(90deg);
-        opacity: 0;
-    }
-    
-    40% {
-        -moz-transform: perspective(400px) rotateY(-10deg);
-    }
-    
-    70% {
-        -moz-transform: perspective(400px) rotateY(10deg);
-    }
-    
-    100% {
-        -moz-transform: perspective(400px) rotateY(0deg);
-        opacity: 1;
-    }
+		0% {
+				-moz-transform: perspective(400px) rotateY(90deg);
+				opacity: 0;
+		}
+		
+		40% {
+				-moz-transform: perspective(400px) rotateY(-10deg);
+		}
+		
+		70% {
+				-moz-transform: perspective(400px) rotateY(10deg);
+		}
+		
+		100% {
+				-moz-transform: perspective(400px) rotateY(0deg);
+				opacity: 1;
+		}
 }
 @-ms-keyframes flipInY {
-    0% {
-        -ms-transform: perspective(400px) rotateY(90deg);
-        opacity: 0;
-    }
-    
-    40% {
-        -ms-transform: perspective(400px) rotateY(-10deg);
-    }
-    
-    70% {
-        -ms-transform: perspective(400px) rotateY(10deg);
-    }
-    
-    100% {
-        -ms-transform: perspective(400px) rotateY(0deg);
-        opacity: 1;
-    }
+		0% {
+				-ms-transform: perspective(400px) rotateY(90deg);
+				opacity: 0;
+		}
+		
+		40% {
+				-ms-transform: perspective(400px) rotateY(-10deg);
+		}
+		
+		70% {
+				-ms-transform: perspective(400px) rotateY(10deg);
+		}
+		
+		100% {
+				-ms-transform: perspective(400px) rotateY(0deg);
+				opacity: 1;
+		}
 }
 @-o-keyframes flipInY {
-    0% {
-        -o-transform: perspective(400px) rotateY(90deg);
-        opacity: 0;
-    }
-    
-    40% {
-        -o-transform: perspective(400px) rotateY(-10deg);
-    }
-    
-    70% {
-        -o-transform: perspective(400px) rotateY(10deg);
-    }
-    
-    100% {
-        -o-transform: perspective(400px) rotateY(0deg);
-        opacity: 1;
-    }
+		0% {
+				-o-transform: perspective(400px) rotateY(90deg);
+				opacity: 0;
+		}
+		
+		40% {
+				-o-transform: perspective(400px) rotateY(-10deg);
+		}
+		
+		70% {
+				-o-transform: perspective(400px) rotateY(10deg);
+		}
+		
+		100% {
+				-o-transform: perspective(400px) rotateY(0deg);
+				opacity: 1;
+		}
 }
 @keyframes flipInY {
-    0% {
-        transform: perspective(400px) rotateY(90deg);
-        opacity: 0;
-    }
-    
-    40% {
-        transform: perspective(400px) rotateY(-10deg);
-    }
-    
-    70% {
-        transform: perspective(400px) rotateY(10deg);
-    }
-    
-    100% {
-        transform: perspective(400px) rotateY(0deg);
-        opacity: 1;
-    }
+		0% {
+				transform: perspective(400px) rotateY(90deg);
+				opacity: 0;
+		}
+		
+		40% {
+				transform: perspective(400px) rotateY(-10deg);
+		}
+		
+		70% {
+				transform: perspective(400px) rotateY(10deg);
+		}
+		
+		100% {
+				transform: perspective(400px) rotateY(0deg);
+				opacity: 1;
+		}
 }
 
 .flipInY {
@@ -738,54 +738,54 @@ THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLI
 	animation-name: flipInY;
 }
 @-webkit-keyframes flipOutY {
-    0% {
-        -webkit-transform: perspective(400px) rotateY(0deg);
-        opacity: 1;
-    }
+		0% {
+				-webkit-transform: perspective(400px) rotateY(0deg);
+				opacity: 1;
+		}
 	100% {
-        -webkit-transform: perspective(400px) rotateY(90deg);
-        opacity: 0;
-    }
+				-webkit-transform: perspective(400px) rotateY(90deg);
+				opacity: 0;
+		}
 }
 @-moz-keyframes flipOutY {
-    0% {
-        -moz-transform: perspective(400px) rotateY(0deg);
-        opacity: 1;
-    }
+		0% {
+				-moz-transform: perspective(400px) rotateY(0deg);
+				opacity: 1;
+		}
 	100% {
-        -moz-transform: perspective(400px) rotateY(90deg);
-        opacity: 0;
-    }
+				-moz-transform: perspective(400px) rotateY(90deg);
+				opacity: 0;
+		}
 }
 @-ms-keyframes flipOutY {
-    0% {
-        -ms-transform: perspective(400px) rotateY(0deg);
-        opacity: 1;
-    }
+		0% {
+				-ms-transform: perspective(400px) rotateY(0deg);
+				opacity: 1;
+		}
 	100% {
-        -ms-transform: perspective(400px) rotateY(90deg);
-        opacity: 0;
-    }
+				-ms-transform: perspective(400px) rotateY(90deg);
+				opacity: 0;
+		}
 }
 @-o-keyframes flipOutY {
-    0% {
-        -o-transform: perspective(400px) rotateY(0deg);
-        opacity: 1;
-    }
+		0% {
+				-o-transform: perspective(400px) rotateY(0deg);
+				opacity: 1;
+		}
 	100% {
-        -o-transform: perspective(400px) rotateY(90deg);
-        opacity: 0;
-    }
+				-o-transform: perspective(400px) rotateY(90deg);
+				opacity: 0;
+		}
 }
 @keyframes flipOutY {
-    0% {
-        transform: perspective(400px) rotateY(0deg);
-        opacity: 1;
-    }
+		0% {
+				transform: perspective(400px) rotateY(0deg);
+				opacity: 1;
+		}
 	100% {
-        transform: perspective(400px) rotateY(90deg);
-        opacity: 0;
-    }
+				transform: perspective(400px) rotateY(90deg);
+				opacity: 0;
+		}
 }
 
 .flipOutY {
@@ -3745,60 +3745,60 @@ THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLI
 /* originally authored by Nick Pettit - https://github.com/nickpettit/glide */
 
 @-webkit-keyframes rollOut {
-    0% {
+		0% {
 		opacity: 1;
 		-webkit-transform: translateX(0px) rotate(0deg);
 	}
 
-    100% {
+		100% {
 		opacity: 0;
 		-webkit-transform: translateX(100%) rotate(120deg);
 	}
 }
 
 @-moz-keyframes rollOut {
-    0% {
+		0% {
 		opacity: 1;
 		-moz-transform: translateX(0px) rotate(0deg);
 	}
 
-    100% {
+		100% {
 		opacity: 0;
 		-moz-transform: translateX(100%) rotate(120deg);
 	}
 }
 
 @-ms-keyframes rollOut {
-    0% {
+		0% {
 		opacity: 1;
 		-ms-transform: translateX(0px) rotate(0deg);
 	}
 
-    100% {
+		100% {
 		opacity: 0;
 		-ms-transform: translateX(100%) rotate(120deg);
 	}
 }
 
 @-o-keyframes rollOut {
-    0% {
+		0% {
 		opacity: 1;
 		-o-transform: translateX(0px) rotate(0deg);
 	}
 
-    100% {
+		100% {
 		opacity: 0;
 		-o-transform: translateX(100%) rotate(120deg);
 	}
 }
 
 @keyframes rollOut {
-    0% {
+		0% {
 		opacity: 1;
 		transform: translateX(0px) rotate(0deg);
 	}
 
-    100% {
+		100% {
 		opacity: 0;
 		transform: translateX(100%) rotate(120deg);
 	}

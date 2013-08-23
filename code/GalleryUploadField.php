@@ -235,11 +235,11 @@ class GalleryUploadField_ItemHandler extends UploadField_ItemHandler {
 	 * @param int $pageID
 	 */
 	public function __construct($parent, $itemID, $pageID) {
-	    $this->parent = $parent;
-	    $this->itemID = $itemID;
-	    $this->pageID = $pageID;
+			$this->parent = $parent;
+			$this->itemID = $itemID;
+			$this->pageID = $pageID;
 	
-	    parent::__construct($parent, $itemID);
+			parent::__construct($parent, $itemID);
 	}
 	
 	private static $allowed_actions = array(
@@ -289,11 +289,11 @@ class GalleryUploadField_ItemHandler extends UploadField_ItemHandler {
 		
 		//Get join object for populating caption
 		$parentID = $this->pageID;
-  	$record = Page::get()
-  		->where("\"SiteTree\".\"ID\" = '$parentID'")
-  		->first();
+		$record = Page::get()
+			->where("\"SiteTree\".\"ID\" = '$parentID'")
+			->first();
 
-  	list($parentClass, $componentClass, $parentField, $componentField, $table) = $record->many_many('Images');
+		list($parentClass, $componentClass, $parentField, $componentField, $table) = $record->many_many('Images');
 
 		$joinObj = $table::get()
 				->where("\"$parentField\" = '{$parentID}' AND \"ImageID\" = '{$file->ID}'")
