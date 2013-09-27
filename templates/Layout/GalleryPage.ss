@@ -2,6 +2,7 @@
 
 <% require javascript(framework/thirdparty/jquery/jquery.js) %>
 <% require javascript(gallery/javascript/jquery.ad-gallery.min.js) %>
+<% require javascript(gallery/javascript/ss_galleries.js) %>
 
 <div class="content-container">
     <article>

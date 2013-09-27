@@ -1,5 +1,5 @@
 <% if $Images %>
-    <div id="gallery" class="ad-gallery">
+    <div id="gallery" class="ad-gallery" data-width="{$Width}" data-height="{$Height}">
         <div class="ad-image-wrapper"></div>
 
         <div class="ad-controls"></div>
