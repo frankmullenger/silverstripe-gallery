@@ -166,8 +166,6 @@ class GalleryUploadField extends UploadField {
 		$relName = $this->getName();
 		$parentID = $record->ID;
 		list($parentClass, $componentClass, $parentField, $componentField, $table) = $record->many_many($relName);
-		
-		SS_Log::log(new Exception(print_r($table, true)), SS_Log::NOTICE);
 
 		if ($fileIDs && is_array($fileIDs)) foreach ($fileIDs as $order => $fileID) {
 			$newOrder = $order + 1;

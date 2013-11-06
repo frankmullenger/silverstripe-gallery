@@ -5,17 +5,18 @@
 			onmatch : function() {
 				var self = this;
 
-				this.sortable({ 
+				this.sortable({
 					opacity: 0.5,
 					axis: 'y',
 					update: function(event, ui) {
 
 						if(event.type == "sortupdate") {
-							ids = new Array(),
-								config = $.parseJSON($('div.galleryupload input').data('config').replace(/'/g,'"'));
-						} else {
-							ids = new Array(),
-								config = $.parseJSON(fileInput.data('config').replace(/'/g,'"'));
+							ids = [];
+							config = $.parseJSON($('div.galleryupload input').data('config').replace(/'/g,'"'));
+						}
+						else {
+							ids =[];
+							config = $.parseJSON(fileInput.data('config').replace(/'/g,'"'));
 						}
 
 						$('.galleryfield-files .ss-uploadfield-item').each(function(){
@@ -23,7 +24,7 @@
 						});
 
 						$.post(
-							config['urlSort'], 
+							config['urlSort'],
 							{'ids' : ids}
 						);
 					}
