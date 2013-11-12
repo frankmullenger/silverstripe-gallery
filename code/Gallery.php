@@ -54,7 +54,7 @@ class Gallery_ImageExtension extends DataExtension {
 	
 	public function Caption() {
 
-		//TODO: Make this more generic and not require a db query each time
+		//TODO: Refactor so doesn't query database each time
 		$controller = Controller::curr();
 		$page = $controller->data();
 		list($parentClass, $componentClass, $parentField, $componentField, $table) = $page->many_many('Images');
