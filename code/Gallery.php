@@ -7,13 +7,15 @@ class Gallery_PageExtension extends DataExtension {
 	);
 	
 	public function updateCMSFields(FieldList $fields) {
+
 		$fields->addFieldToTab('Root.Gallery', GalleryUploadField::create(
 			'Images',
-			''
+			'',
+			$this->owner->OrderedImages()
 		));
 	}
 	
-	public function Images() {
+	public function OrderedImages() {
 		return $this->owner->getManyManyComponents(
 			'Images',
 			'',
@@ -48,16 +50,16 @@ class Gallery_ImageExtension extends DataExtension {
 		return $fields;
 	}
 	
-	// public function Caption() {
+	public function Caption() {
 
-	// 	//TODO: Make this more generic and not require a db query each time
-	// 	$controller = Controller::curr();
-	// 	$page = $controller->data();
+		//TODO: Make this more generic and not require a db query each time
+		$controller = Controller::curr();
+		$page = $controller->data();
 
-	// 	$joinObj = GalleryPage_Images::get()
-	// 		->where("\"GalleryPageID\" = '{$page->ID}' AND \"ImageID\" = '{$this->owner->ID}'")
-	// 		->first();
+		$joinObj = Page_Images::get()
+			->where("\"PageID\" = '{$page->ID}' AND \"ImageID\" = '{$this->owner->ID}'")
+			->first();
 			
-	// 	return $joinObj->Caption;
-	// }
+		return $joinObj->Caption;
+	}
 }

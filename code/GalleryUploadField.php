@@ -166,8 +166,6 @@ class GalleryUploadField extends UploadField {
 		$relName = $this->getName();
 		$parentID = $record->ID;
 		list($parentClass, $componentClass, $parentField, $componentField, $table) = $record->many_many($relName);
-		
-		SS_Log::log(new Exception(print_r($table, true)), SS_Log::NOTICE);
 
 		if ($fileIDs && is_array($fileIDs)) foreach ($fileIDs as $order => $fileID) {
 			$newOrder = $order + 1;
@@ -226,11 +224,84 @@ class GalleryUploadField extends UploadField {
 			&& ($record->has_one($fieldName) || $record->has_many($fieldName) || $record->many_many($fieldName))
 		);
 	}
+	
+	/**
+	 * Need to call Gallery_PageExtension::OrderedImages() to get correct order
+	 * of images, cannot declare Imates() method in extension it won't be used
+	 */
+	public function setValue($value, $record = null) {
+
+		// If we're not passed a value directly, we can attempt to infer the field
+		// value from the second parameter by inspecting its relations
+		$items = new ArrayList();
+
+		// Determine format of presented data
+		if(empty($value) && $record) {
+
+			// If a record is given as a second parameter, but no submitted values,
+			// then we should inspect this instead for the form values
+			if(($record instanceof DataObject) && $record->hasMethod('OrderedImages')) {
+				// If given a dataobject use reflection to extract details
+				
+				$data = $record->OrderedImages();
+				if($data instanceof DataObject) {
+					// If has_one, add sole item to default list
+					$items->push($data);
+				} elseif($data instanceof SS_List) {
+					// For many_many and has_many relations we can use the relation list directly
+					$items = $data;
+				}
+			} elseif($record instanceof SS_List) {
+				// If directly passing a list then save the items directly
+				$items = $record;
+			}
+		} elseif(!empty($value['Files'])) {
+			// If value is given as an array (such as a posted form), extract File IDs from this
+			$class = $this->getRelationAutosetClass();
+			$items = DataObject::get($class)->byIDs($value['Files']);
+		}
+		
+		// If javascript is disabled, direct file upload (non-html5 style) can 
+		// trigger a single or multiple file submission. Note that this may be
+		// included in addition to re-submitted File IDs as above, so these
+		// should be added to the list instead of operated on independently.
+		if($uploadedFiles = $this->extractUploadedFileData($value)) {
+			foreach($uploadedFiles as $tempFile) {
+				$file = $this->saveTemporaryFile($tempFile, $error);
+				if($file) {
+					$items->add($file);
+				} else {
+					throw new ValidationException($error);
+				}
+			}
+		}
+		
+		// Filter items by what's allowed to be viewed
+		$filteredItems = new ArrayList();
+		$fileIDs = array();
+		foreach($items as $file) {
+			if($file->exists() && $file->canView()) {
+				$filteredItems->push($file);
+				$fileIDs[] = $file->ID;
+			}
+		}
+		
+		// Filter and cache updated item list
+		$this->items = $filteredItems;
+		// Same format as posted form values for this field. Also ensures that
+		// $this->setValue($this->getValue()); is non-destructive
+		$value = $fileIDs ? array('Files' => $fileIDs) : null;
+
+		// To match FormField::setValue()
+		$this->value = $value;
+		return $this;
+	}
 }
 
 class GalleryUploadField_ItemHandler extends UploadField_ItemHandler {
 	
 	protected $pageID;
+	
 	/**
 	 * @param UploadFIeld $parent
 	 * @param int $item
