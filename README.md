@@ -16,13 +16,19 @@ Frank Mullenger
 ## Documentation
 Very simple gallery solution to upload images and display them in a basic gallery using Fancybox. 
 
-Gallery can be applied to any page type, GalleryPage is shipped with this module as an example.
+A __gallery can be added to any page type__, GalleryPage is shipped with this module as an example.
 
 Uses customised UploadField to manage the images, allowing bulk upload of images then resorting using drag drop and editing of captions inline.
 
 You are required to [purchase a licence for Fancybox](http://fancyapps.com/fancybox/#license) for commercial websites. Fancy box can be replaced easily for each page type you apply the gallery to.
 
 ## Installation Instructions
+
+### Composer
+1. ```composer require frankmullenger/gallery 1.0.*@dev```
+2. Visit yoursite.com/dev/build?flush=1 to rebuild the database (you may need to do this twice).
+
+### Manual
 1. Place this directory in the root of your SilverStripe installation, rename the folder 'gallery'.
 2. Visit yoursite.com/dev/build?flush=1 to rebuild the database (you may need to do this twice).
 
