@@ -16,8 +16,9 @@ class Gallery_PageExtension extends DataExtension {
 	}
 	
 	public function OrderedImages() {
+
 		list($parentClass, $componentClass, $parentField, $componentField, $table) = $this->owner->many_many('Images');
-		
+
 		return $this->owner->getManyManyComponents(
 			'Images',
 			'',
