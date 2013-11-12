@@ -16,3 +16,13 @@ class GalleryPage_Controller extends Page_Controller {
 		Requirements::css('gallery/css/jquery.fancybox.css');
 	}
 }
+
+class GalleryPage_Images extends DataObject {
+	
+	static $db = array (
+		'PageID' => 'Int',
+		'ImageID' => 'Int',
+		'Caption' => 'Text',
+		'SortOrder' => 'Int'
+	);
+}

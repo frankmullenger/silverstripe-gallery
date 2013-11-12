@@ -16,10 +16,12 @@ class Gallery_PageExtension extends DataExtension {
 	}
 	
 	public function OrderedImages() {
+		list($parentClass, $componentClass, $parentField, $componentField, $table) = $this->owner->many_many('Images');
+		
 		return $this->owner->getManyManyComponents(
 			'Images',
 			'',
-			"\"Page_Images\".\"SortOrder\" ASC"
+			"\"{$table}\".\"SortOrder\" ASC"
 		);
 	}
 }
@@ -55,9 +57,10 @@ class Gallery_ImageExtension extends DataExtension {
 		//TODO: Make this more generic and not require a db query each time
 		$controller = Controller::curr();
 		$page = $controller->data();
+		list($parentClass, $componentClass, $parentField, $componentField, $table) = $page->many_many('Images');
 
-		$joinObj = Page_Images::get()
-			->where("\"PageID\" = '{$page->ID}' AND \"ImageID\" = '{$this->owner->ID}'")
+		$joinObj = $table::get()
+			->where("\"{$parentField}\" = '{$page->ID}' AND \"ImageID\" = '{$this->owner->ID}'")
 			->first();
 			
 		return $joinObj->Caption;
