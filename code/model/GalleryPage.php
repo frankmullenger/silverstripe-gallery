@@ -8,16 +8,27 @@ class GalleryPage extends Page {
     );
 
     private static $many_many = array(
-        'Images'     => 'Image'
+        'Images' => 'Image'
+    );
+
+    private static $many_many_extraFields = array(
+        'Images' => array('SortOrder' => 'Int')
     );
 
     public function getCMSFields() {
         $fields = parent::getCMSFields();
 
-        // Determine if you need to show gallery fields
-        $fields->addFieldToTab("Root.Gallery", UploadField::create("Images", "Images to appear in gallery"));
-
         $fields->removeByName('HideDescription');
+
+        $upload_folder = Controller::join_links(
+            "gallery",
+            $this->ID
+        );
+
+        $sortable_field = SortableUploadField::create('Images', 'Images to associate with this page')
+            ->setFolderName($upload_folder);
+
+        $fields->addFieldToTab("Root.Gallery", $sortable_field);
 
         return $fields;
     }
