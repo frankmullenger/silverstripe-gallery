@@ -15,6 +15,15 @@ class GalleryPage extends Page {
         'Images' => array('SortOrder' => 'Int')
     );
 
+    /**
+     * Return sorted images
+     *
+     * @return ArrayList
+     */
+    public function SortedImages(){
+        return $this->Images()->Sort('SortOrder');
+    }
+
     public function getCMSFields() {
         $fields = parent::getCMSFields();
 
