@@ -146,7 +146,7 @@ class GalleryUploadField extends UploadField {
 		$config = array_merge($config, $this->ufConfig, $configOverwrite);
 
 		return $this->customise(array(
-			'configString' => str_replace('"', "'", Convert::raw2json($config)),
+			'configString' => str_replace('"', "&quot;", Convert::raw2json($config)),
 			'config' => new ArrayData($config),
 			'multiple' => $config['maxNumberOfFiles'] !== 1,
 			'displayInput' => (!isset($configOverwrite['maxNumberOfFiles']) || $configOverwrite['maxNumberOfFiles'])
