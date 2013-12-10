@@ -12,11 +12,11 @@
 
 						if(event.type == "sortupdate") {
 							ids = [];
-							config = $.parseJSON($('div.galleryupload input').data('config').replace(/'/g,'"'));
+							config = $.parseJSON($('div.galleryupload input#Form_EditForm_Images').attr('data-config').replace(/'/g,'"'));
 						}
 						else {
 							ids =[];
-							config = $.parseJSON(fileInput.data('config').replace(/'/g,'"'));
+							config = fileInput.data('config');
 						}
 
 						$('.galleryfield-files .ss-uploadfield-item').each(function(){
