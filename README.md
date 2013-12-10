@@ -7,11 +7,11 @@ Frank Mullenger
 [Ecommerce Module](https://swipestripe.com)
 
 ## Requirements
-* SilverStripe framework 3.*
-* SilverStripe cms 3.*
+* SilverStripe framework >3.1.2
+* SilverStripe cms >3.1.2
 
 ## Version
-1.0
+1.1
 
 ## Documentation
 Very simple gallery solution to upload images and display them in a basic gallery using Fancybox. 
