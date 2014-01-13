@@ -77,7 +77,11 @@
 	background: #fff;
 	border: 1px solid #ccc;
 	margin: 10px;
-	cursor: pointer;
+	cursor: move;
+}
+.galleryupload .ss-uploadfield-files .ss-uploadfield-item label, 
+.galleryupload .ss-uploadfield-files .ss-uploadfield-item.ui-state-error label {
+	cursor: move;
 }
 
 .galleryupload .ss-uploadfield-files .ss-uploadfield-item:last-child,
