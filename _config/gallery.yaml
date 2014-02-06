@@ -8,3 +8,6 @@ Image:
 GalleryPage:
   extensions: 
     - 'Gallery_PageExtension'
+GalleryPage_Controller:
+  extensions: 
+    - 'Fancybox2_ControllerExtension'
