@@ -20,7 +20,8 @@ A __gallery can be added to any page type__, GalleryPage is shipped with this mo
 
 Uses customised UploadField to manage the images, allowing bulk upload of images then resorting using drag drop and editing of captions inline.
 
-You are required to [purchase a licence for Fancybox](http://fancyapps.com/fancybox/#license) for commercial websites. Fancy box can be replaced easily for each page type you apply the gallery to.
+An example implementation using Fancybox2 has been provided.
+You are required to [purchase a licence for Fancybox](http://fancyapps.com/fancybox/#license) for commercial websites. Fancybox can be replaced easily for each page type you apply the gallery to.
 
 ## Installation Instructions
 
