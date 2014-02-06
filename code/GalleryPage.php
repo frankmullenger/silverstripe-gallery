@@ -19,7 +19,7 @@ class GalleryPage_Controller extends Page_Controller {
 
 class GalleryPage_Images extends DataObject {
 	
-	static $db = array (
+	private static $db = array (
 		'PageID' => 'Int',
 		'ImageID' => 'Int',
 		'Caption' => 'Text',

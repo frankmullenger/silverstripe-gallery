@@ -2,7 +2,7 @@
 
 class Gallery_PageExtension extends DataExtension {
 
-	public static $many_many = array(
+	private static $many_many = array(
 		'Images' => 'Image'	
 	);
 	
@@ -29,7 +29,7 @@ class Gallery_PageExtension extends DataExtension {
 
 class Gallery_ImageExtension extends DataExtension {
 
-	public static $belongs_many_many = array(
+	private static $belongs_many_many = array(
 		'Pages' => 'Page'
 	);
 	
