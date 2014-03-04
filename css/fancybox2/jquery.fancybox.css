@@ -73,14 +73,14 @@
 	margin-left: -21px;
 	width: 42px;
 	height: 42px;
-	background: url('../images/fancybox_loading.gif');
+	background: url('../../images/fancybox_loading.gif');
 	opacity: 0.8;
 	cursor: pointer;
 	z-index: 1010;
 }
 
 .fancybox-close, .fancybox-prev span, .fancybox-next span {
-	background-image: url('../images/fancybox_sprite.png');
+	background-image: url('../../images/fancybox_sprite.png');
 }
 
 .fancybox-close {
@@ -99,7 +99,7 @@
 	width: 40%;
 	height: 100%;
 	cursor: pointer;
-	background: transparent url('../images/blank.gif'); /* helps IE */
+	background: transparent url('../../images/blank.gif'); /* helps IE */
 	z-index: 1003;
 }
 
