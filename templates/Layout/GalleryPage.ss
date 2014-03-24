@@ -5,7 +5,9 @@
 <% require javascript(gallery/javascript/jquery.flexslider.min.js) %>
 <% require javascript(gallery/javascript/gallery.js) %>
 
-<div class="content-container">
+<% include SideBar %>
+
+<div class="content-container <% if $Menu(2) %>unit-75<% end_if %>">
     <article>
         <h1>$Title</h1>
 
@@ -17,5 +19,3 @@
     $Form
     $PageComments
 </div>
-
-<% include SideBar %>
