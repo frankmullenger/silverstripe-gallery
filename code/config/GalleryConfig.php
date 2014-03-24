@@ -12,20 +12,23 @@ class GalleryConfig {
      * Max width of the gallery image
      *
      * @var Int
+     * @config
      */
-    private static $width = 800;
+    private static $width = 950;
 
     /**
      * Max height of the gallery image
      *
      * @var Int
+     * @config
      */
-    private static $height = 400;
+    private static $height = 500;
 
     /**
      * Max width of the thumbnail image
      *
      * @var Int
+     * @config
      */
     private static $thumb_width = 150;
 
@@ -33,8 +36,9 @@ class GalleryConfig {
      * Max height of the thumbnail image
      *
      * @var Int
+     * @config
      */
-    private static $thumb_height = 132;
+    private static $thumb_height = 100;
 
     /**
      * Specify the type of resize we use, either:
@@ -45,6 +49,7 @@ class GalleryConfig {
      *          cause issues in older version of IE
      *
      * @var String
+     * @config
      */
     private static $resize_type = 'crop';
 
