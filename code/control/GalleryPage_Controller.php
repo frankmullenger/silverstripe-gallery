@@ -4,14 +4,23 @@ class GalleryPage_Controller extends Page_Controller {
         parent::init();
     }
 
+    /**
+     * Generate an image gallery from the Gallery template, if no images are
+     * available, then return an empty string.
+     *
+     * @return String
+     */
     public function Gallery() {
-        $vars = array(
-            'HideDescription' => $this->HideDescription,
-            'Images' => $this->Images()->sort('SortOrder'),
-            'Width' => GalleryConfig::getWidth(),
-            'Height' => GalleryConfig::getHeight()
-        );
+        if($this->Images()->exists()) {
+            $vars = array(
+                'HideDescription' => $this->HideDescription,
+                'Images' => $this->Images()->sort('SortOrder'),
+                'Width' => GalleryConfig::getWidth(),
+                'Height' => GalleryConfig::getHeight()
+            );
 
-        return $this->renderWith('Gallery',$vars);
+            return $this->renderWith('Gallery',$vars);
+        } else
+            return "";
     }
 }
