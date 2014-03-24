@@ -1,23 +1,23 @@
 <% if $Images %>
-    <div id="gallery" class="ad-gallery" data-width="{$Width}" data-height="{$Height}">
-        <div class="ad-image-wrapper"></div>
-
-        <div class="ad-controls"></div>
-
-        <div class="ad-nav">
-            <div class="ad-thumbs">
-                <ul class="ad-thumb-list">
-                    <% loop $Images %><li>
-                        <a href="$GalleryImage.Link">
-                            <img
-                                src="$GalleryThumbnail.Link"
-                                <% if not Top.HideDescription %>alt="$Title"<% end_if %>
-                                class="image{$Pos}"
-                            >
-                        </a>
-                    </li><% end_loop %>
-                </ul>
+    <div class="gallery-holder">
+        <div class="gallery flexslider">
+            <div class="slides">
+                <% loop $Images %>
+                    <div class="slide pos-{$Pos} $FirstLast">
+                        $GalleryImage
+                    </div>
+                <% end_loop %>
             </div>
+        </div>
+
+        <div class="control flexslider">
+            <ul class="slides">
+                <% loop $Images %>
+                    <li class="slide pos-{$Pos} $FirstLast">
+                        $GalleryThumbnail
+                    </li>
+                <% end_loop %>
+            </ul>
         </div>
     </div>
 <% end_if %>

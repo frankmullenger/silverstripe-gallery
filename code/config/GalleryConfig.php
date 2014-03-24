@@ -27,14 +27,14 @@ class GalleryConfig {
      *
      * @var Int
      */
-    private static $thumb_width = 60;
+    private static $thumb_width = 150;
 
     /**
      * Max height of the thumbnail image
      *
      * @var Int
      */
-    private static $thumb_height = 60;
+    private static $thumb_height = 132;
 
     /**
      * Specify the type of resize we use, either:

@@ -1,8 +1,9 @@
-<% require css(gallery/css/jquery.ad-gallery.css) %>
+<% require css(gallery/css/flexslider.css) %>
+<% require css(gallery/css/gallery.css) %>
 
 <% require javascript(framework/thirdparty/jquery/jquery.js) %>
-<% require javascript(gallery/javascript/jquery.ad-gallery.min.js) %>
-<% require javascript(gallery/javascript/ss_galleries.js) %>
+<% require javascript(gallery/javascript/jquery.flexslider.min.js) %>
+<% require javascript(gallery/javascript/gallery.js) %>
 
 <div class="content-container">
     <article>
@@ -12,8 +13,9 @@
 
         <div class="content">$Content</div>
     </article>
-        $Form
-        $PageComments
+
+    $Form
+    $PageComments
 </div>
 
 <% include SideBar %>

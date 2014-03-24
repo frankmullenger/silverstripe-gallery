@@ -1,0 +1,15 @@
+/* Reduce the margin below the main gallery and control nav */
+.gallery-holder .flexslider { margin-bottom: 1em; }
+
+/* REMOVE TYPOGRAPHY STYLES ON UL's */
+.gallery-holder .flexslider ul { margin: 0; }
+.gallery-holder .flexslider ul li { margin: 0; }
+
+/* DIRECTION NAV STYLES */
+.gallery-holder .flexslider .flex-direction-nav a { line-height: 3em; }
+
+/* CONTROL NAV STYLES */
+.gallery-holder .control .slides .slide { margin-right: 5px; opacity: 0.5; cursor: pointer; }
+.gallery-holder .control .slides .flex-active-slide,
+.gallery-holder .control .slides .slide:hover { opacity: 1; }
+
