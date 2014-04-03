@@ -1,18 +1,25 @@
 <?php
 
 class Gallery_PageExtension extends DataExtension {
-
+	
+	private static $has_one = array(
+		'ImageFolder' => 'Folder',
+	);
+	
 	private static $many_many = array(
 		'Images' => 'Image'	
 	);
 	
 	public function updateCMSFields(FieldList $fields) {
 
-		$fields->addFieldToTab('Root.Gallery', GalleryUploadField::create(
-			'Images',
-			'',
-			$this->owner->OrderedImages()
-		));
+		$fields->addFieldToTab(
+			'Root.Gallery', 
+			GalleryUploadField::create(
+				'Images',
+				'',
+				$this->owner->OrderedImages()
+			)->setFolderName($this->owner->getFolderPath())
+		);
 	}
 	
 	public function OrderedImages() {
@@ -25,6 +32,33 @@ class Gallery_PageExtension extends DataExtension {
 			"\"{$table}\".\"SortOrder\" ASC"
 		);
 	}
+	
+	function onBeforeWrite() {
+		parent::onBeforeWrite();
+		
+		if (!$this->owner->ImageFolder() || !$this->owner->ImageFolder()->exists()) {
+			$folderpath = $this->owner->getFolderPath();
+			$folder = Folder::find_or_make($folderpath);
+			$this->owner->ImageFolderID = $folder->ID;
+		} else if($this->owner->isChanged('URLSegment', 2)) {
+			$folder = $this->owner->getComponent('ImageFolder');
+			$folder->setTitle($this->owner->URLSegment);
+			$folder->write();
+		}
+		
+	}
+	
+	public function getFolderPath() {
+		if (!$this->owner->URLSegment) {
+			$this->owner->URLSegment = 'new-gallery';
+		}
+		$folderpath = 'galleries/'.$this->owner->URLSegment;
+		if ($this->owner->ImageFolder() && $this->owner->ImageFolder()->exists()) {
+			$folderpath = str_replace('assets/', '', $this->owner->ImageFolder()->getFilename());
+		}
+		return $folderpath;
+	}
+	
 }
 
 class Gallery_ImageExtension extends DataExtension {
