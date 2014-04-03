@@ -65,27 +65,14 @@ class GalleryUploadField extends UploadField {
 	);
 
 	public function Field($properties = array()) {
-
-		$record = $this->getRecord();
-		$name = $this->getName();
-
-		// if there is a has_one relation with that name on the record and 
-		// allowedMaxFileNumber has not been set, it's wanted to be 1
-		if($record 
-			&& $record->exists()
-			&& $record->has_one($name) 
-			&& !$this->getConfig('allowedMaxFileNumber')
-		) {
-			$this->setConfig('allowedMaxFileNumber', 1);
-		}
-
 		Requirements::javascript(THIRDPARTY_DIR . '/jquery/jquery.js');
 		Requirements::javascript(THIRDPARTY_DIR . '/jquery-ui/jquery-ui.js');
 		Requirements::javascript(THIRDPARTY_DIR . '/jquery-entwine/dist/jquery.entwine-dist.js');
-		Requirements::javascript(FRAMEWORK_DIR . '/javascript/i18n.js');
 		Requirements::javascript(FRAMEWORK_ADMIN_DIR . '/javascript/ssui.core.js');
+		Requirements::add_i18n_javascript(FRAMEWORK_DIR . '/javascript/lang');
 
 		Requirements::combine_files('uploadfield.js', array(
+			// @todo jquery templates is a project no longer maintained and should be retired at some point.
 			THIRDPARTY_DIR . '/javascript-templates/tmpl.js',
 			THIRDPARTY_DIR . '/javascript-loadimage/load-image.js',
 			THIRDPARTY_DIR . '/jquery-fileupload/jquery.iframe-transport.js',
@@ -96,14 +83,10 @@ class GalleryUploadField extends UploadField {
 			FRAMEWORK_DIR . '/javascript/UploadField_downloadtemplate.js',
 			FRAMEWORK_DIR . '/javascript/UploadField.js',
 		));
-
-		Requirements::javascript(THIRDPARTY_DIR . '/jquery/jquery.js');
-		// Requirements::javascript('gallery/javascript/GalleryUploadField.js');
-
 		Requirements::css(THIRDPARTY_DIR . '/jquery-ui-themes/smoothness/jquery-ui.css'); // TODO hmmm, remove it?
 		Requirements::css(FRAMEWORK_DIR . '/css/UploadField.css');
-		// Requirements::css('gallery/css/GalleryUploadField.css');
 
+		// Calculated config as per jquery.fileupload-ui.js
 		$allowedMaxFileNumber = $this->getAllowedMaxFileNumber();
 		$config = array(
 			'url' => $this->Link('upload'),
@@ -115,40 +98,54 @@ class GalleryUploadField extends UploadField {
 			// Fileupload treats maxNumberOfFiles as the max number of _additional_ items allowed
 			'maxNumberOfFiles' => $allowedMaxFileNumber ? ($allowedMaxFileNumber - count($this->getItemIDs())) : null
 		);
-		if (count($this->getValidator()->getAllowedExtensions())) {
-			$allowedExtensions = $this->getValidator()->getAllowedExtensions();
+		
+		// Validation: File extensions
+		if ($allowedExtensions = $this->getAllowedExtensions()) {
 			$config['acceptFileTypes'] = '(\.|\/)(' . implode('|', $allowedExtensions) . ')$';
 			$config['errorMessages']['acceptFileTypes'] = _t(
 				'File.INVALIDEXTENSIONSHORT', 
 				'Extension is not allowed'
 			);
 		}
-		if ($this->getValidator()->getAllowedMaxFileSize()) {
-			$config['maxFileSize'] = $this->getValidator()->getAllowedMaxFileSize();
+		
+		// Validation: File size
+		if ($allowedMaxFileSize = $this->getValidator()->getAllowedMaxFileSize()) {
+			$config['maxFileSize'] = $allowedMaxFileSize;
 			$config['errorMessages']['maxFileSize'] = _t(
 				'File.TOOLARGESHORT', 
 				'Filesize exceeds {size}',
 				array('size' => File::format_size($config['maxFileSize']))
 			);
 		}
-		if ($config['maxNumberOfFiles'] > 1) {
+		
+		// Validation: Number of files
+		if ($allowedMaxFileNumber) {
+			if($allowedMaxFileNumber > 1) {
 			$config['errorMessages']['maxNumberOfFiles'] = _t(
 				'UploadField.MAXNUMBEROFFILESSHORT', 
 				'Can only upload {count} files',
-				array('count' => $config['maxNumberOfFiles'])
+					array('count' => $allowedMaxFileNumber)
+				);
+			} else {
+				$config['errorMessages']['maxNumberOfFiles'] = _t(
+					'UploadField.MAXNUMBEROFFILESONE', 
+					'Can only upload one file'
 			);
 		}
-		$configOverwrite = array();
-		if (is_numeric($config['maxNumberOfFiles']) && $this->getItems()->count()) {
-			$configOverwrite['maxNumberOfFiles'] = $config['maxNumberOfFiles'] - $this->getItems()->count();
 		}
 
-		$config = array_merge($config, $this->ufConfig, $configOverwrite);
+		//get all the existing files in the current folder
+		if ($this->getOverwriteWarning()) {
+			//add overwrite warning error message to the config object sent to Javascript
+			$config['errorMessages']['overwriteWarning'] =
+				_t('UploadField.OVERWRITEWARNING', 'File with the same name already exists');
+		}
 
+		$mergedConfig = array_merge($config, $this->ufConfig);
 		return $this->customise(array(
-			'configString' => str_replace('"', "&quot;", Convert::raw2json($config)),
-			'config' => new ArrayData($config),
-			'multiple' => $config['maxNumberOfFiles'] !== 1,
+			'configString' => str_replace('"', "&quot;", Convert::raw2json($mergedConfig)),
+			'config' => new ArrayData($mergedConfig),
+			'multiple' => $allowedMaxFileNumber !== 1,
 			'displayInput' => (!isset($configOverwrite['maxNumberOfFiles']) || $configOverwrite['maxNumberOfFiles'])
 		))->renderWith($this->getTemplates());
 	}

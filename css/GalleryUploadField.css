@@ -13,7 +13,7 @@
 	border-top: none;
 }
 
-.galleryupload .ss-uploadfield-dropzone {
+.galleryupload .ss-uploadfield-addfile .ss-uploadfield-dropzone {
 		background: none repeat scroll 0 0 #D4DBE0;
 		border: 2px dashed gray;
 		border-radius: 13px 13px 13px 13px;
