@@ -87,7 +87,7 @@
 					</div>
 				</div>
 
-				<div class="ss-uploadfield-item-editform loading includeParent">
+				<div class="ss-uploadfield-item-editform includeParent">
 					<iframe frameborder="0" src="$UploadFieldEditLink"></iframe>
 				</div>
 
