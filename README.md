@@ -97,6 +97,72 @@ GalleryPage:
     - 'Gallery_PageExtension'
 ```
 
+#### Using in frontend
+Create your Form like following example
+```php
+class GalleryPage_Controller extends Page_Controller {
+
+    ...
+    
+    public function GalleryImageForm() {
+        $urlParams = $this->getURLParams();
+        // Todo: join doesn't work
+        $images = Image::get()->leftJoin('GalleryPage_Images', 'GalleryPageID = '.$urlParams['ID']);
+        
+        $fields = new FieldList(
+            new HiddenField('GalleryPageID', 'GalleryPageID', $urlParams['ID']),
+            $galleryUploadField = new GalleryUploadField('Images', '')
+        );
+        // existing files can't be added
+        $galleryUploadField->setCanAttachExisting(false);
+
+        $actions = new FieldList(new FormAction('doSaveImage', 'Bild/er speichern'));
+        
+        return new Form($this, 'GalleryImageForm', $fields, $actions, null);
+    }
+ 
+    /**
+     * save the image relations in db
+     * 
+     * @param type $data
+     * @param Form $form
+     * @return type
+     */
+    public function doSaveImage($data, Form $form) {
+        $files = $data['Images']['Files'];
+        $galleryPageID = $data['GalleryPageID'];
+        
+        // foreach submitted file
+        foreach($files as $fileID) {
+            $image = Image::get()->filter('ID', $fileID)->first();
+            // create relation between images and objektpage
+            $galleryPageImage = new GalleryPage_Images();
+            $galleryPageImage->Caption = $image->Title;
+            $galleryPageImage->ImageID = $image->ID;
+            $galleryPageImage->GalleryPageID = $galleryPageID;
+            $galleryPageImage->write();
+        }
+        return $this->redirectBack();
+    }
+
+    /**
+     * delete a image from db and upload folder
+     * 
+     * @return type
+     */
+    public function delete_image() {
+        $urlParams = $this->getURLParams();
+        // remove image from db
+        Image::delete_by_id('Image', $urlParams['ID']);
+        
+        return $this->redirectBack();
+    }
+```
+
+```html
+$galleryPageImage
+```
+
 ## Attribution
 This extension uses:
 * [jQuery](http://jquery.com)
