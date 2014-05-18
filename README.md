@@ -97,7 +97,7 @@ GalleryPage:
     - 'Gallery_PageExtension'
 ```
 
-#### Using in frontend
+#### uSAGE in frontend
 Create your Form like following example
 ```php
 class GalleryPage_Controller extends Page_Controller {
