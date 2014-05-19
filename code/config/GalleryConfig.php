@@ -7,7 +7,7 @@
  * The static variables are called by Gallery Page Controller on initilisation
  *
  */
-class GalleryConfig {
+class GalleryConfig extends Object {
     /**
      * Max width of the gallery image
      *
