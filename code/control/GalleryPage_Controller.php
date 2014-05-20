@@ -15,8 +15,8 @@ class GalleryPage_Controller extends Page_Controller {
             $vars = array(
                 'HideDescription' => $this->HideDescription,
                 'Images' => $this->Images()->sort('SortOrder'),
-                'Width' => GalleryConfig::getWidth(),
-                'Height' => GalleryConfig::getHeight()
+                'Width' => GalleryConfig::config()->width,
+                'Height' => GalleryConfig::config()->height
             );
 
             return $this->renderWith('Gallery',$vars);
