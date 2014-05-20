@@ -60,8 +60,8 @@ class GalleryConfig extends Object {
      * @param $height height of the images
      */
     public static function setDimensions($width, $height) {
-        self::$width = $width;
-        self::$height = $height;
+        self::config()->width = $width;
+        self::config()->height = $height;
     }
 
     /**
@@ -71,8 +71,8 @@ class GalleryConfig extends Object {
      * @param $height height of the images
      */
     public static function setThumbDimensions($width, $height) {
-        self::$thumb_width = $width;
-        self::$thumb_height = $height;
+        self::config()->thumb_width = $width;
+        self::config()->thumb_height = $height;
     }
 
     /**
@@ -81,26 +81,26 @@ class GalleryConfig extends Object {
      * @param $width width of the images
      */
     public static function setResizeType($type) {
-        self::$resize_type = $type;
+        self::config()->resize_type = $type;
     }
 
     public static function getWidth() {
-        return self::$width;
+        return self::config()->width;
     }
 
     public static function getHeight() {
-        return self::$height;
+        return self::config()->height;
     }
 
     public static function getThumbWidth() {
-        return self::$thumb_width;
+        return self::config()->thumb_width;
     }
 
     public static function getThumbHeight() {
-        return self::$thumb_height;
+        return self::config()->thumb_height;
     }
 
     public static function getResizeType() {
-        return self::$resize_type;
+        return self::config()->resize_type;
     }
 }
