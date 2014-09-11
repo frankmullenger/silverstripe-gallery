@@ -1,0 +1,8 @@
+en:
+  GalleryPage:
+    DESCRIPTION: 'Multi image gallery'
+    PLURALNAME: 'Gallery Pages'
+    SINGULARNAME: 'Gallery Page'
+  SiteTree:
+    PLURALNAME: Pages
+    SINGULARNAME: Page
