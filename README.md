@@ -26,7 +26,7 @@ You are required to [purchase a licence for Fancybox](http://fancyapps.com/fancy
 ## Installation Instructions
 
 ### Composer
-1. ```composer require frankmullenger/gallery 1.0.*@dev```
+1. ```composer require hpmewes/silverstripe-gallery```
 2. Visit yoursite.com/dev/build?flush=1 to rebuild the database (you may need to do this twice).
 
 ### Manual
@@ -97,7 +97,7 @@ GalleryPage:
     - 'Gallery_PageExtension'
 ```
 
-#### uSAGE in frontend
+#### Usage in frontend
 Create your Form like following example
 ```php
 class GalleryPage_Controller extends Page_Controller {
