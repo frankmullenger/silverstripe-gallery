@@ -409,7 +409,10 @@ class GalleryUploadField_ItemHandler extends UploadField_ItemHandler {
 
 		$form->saveInto($joinObj);
 		$joinObj->write();
-
+		
+		$form->saveInto($item);
+		$item->write();
+		
 		$form->sessionMessage(_t('UploadField.Saved', 'Saved'), 'good');
 
 		return $this->edit($request);
