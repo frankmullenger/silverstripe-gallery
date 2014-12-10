@@ -23,6 +23,14 @@ class GalleryConfig extends Object {
      * @config
      */
     private static $height = 500;
+    
+    /**
+     * If image is padded, use this as the background 
+     *
+     * @var String
+     * @config
+     */
+    private static $background = "ffffff";
 
     /**
      * Max width of the thumbnail image

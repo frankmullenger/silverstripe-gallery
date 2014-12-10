@@ -13,6 +13,7 @@ class GalleryImage extends DataExtension {
         $resize_type = GalleryConfig::getResizeType();
         $width = GalleryConfig::config()->width;
         $height = GalleryConfig::config()->height;
+        $background = GalleryConfig::config()->background;
         $img = false;
 
         switch ($resize_type) {
@@ -20,7 +21,7 @@ class GalleryImage extends DataExtension {
                 $img = $this->owner->croppedImage($width,$height);
                 break;
             case 'pad':
-                $img = $this->owner->paddedImage($width,$height);
+                $img = $this->owner->paddedImage($width,$height,$background);
                 break;
             case 'ratio':
                 $img = $this->owner->SetRatioSize($width,$height);

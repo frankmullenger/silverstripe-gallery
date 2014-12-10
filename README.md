@@ -46,9 +46,11 @@ These are the config options that can be set through GalleryConfig
 
 **width** (default: 800): Width in PX of gallery images
 **height** (default: 400): Height in PX of gallery images
+**background** (default: ffffff): If we use a padded image, set the background colour
 **thumb_width** (default: 150): Width in PX of thumbnail images
 **thumb_height** (default: 100): Height in PX of thumbnail images
 **resize_type** (default: crop): Type of resize to use on images, this can be:
+
 * crop: Crop image to exact size
 * pad: Pad image to size and add whitespace
 * ratio: Perform a ratio resize of images
