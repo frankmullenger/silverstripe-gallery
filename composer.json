@@ -1,5 +1,5 @@
 {
-	"name": "frankmullenger/gallery",
+	"name": "hpmewes/silverstripe-gallery",
 	"description": "SilverStripe Gallery Module",
 	"type": "silverstripe-module",
 	"keywords": ["silverstripe","image gallery","gallery"],
@@ -7,6 +7,10 @@
 		{
 			"name": "Frank Mullenger",
 			"email": "frankmullenger@gmail.com"
+		},
+		{
+			"name": "Mewes Hans-Peter",
+			"email": "meweshp@googlemail.com"
 		}
 	],
 	"require": 
