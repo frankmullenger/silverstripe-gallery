@@ -7,11 +7,16 @@ Frank Mullenger
 [Ecommerce Module](https://swipestripe.com)
 
 ## Requirements
-* SilverStripe framework >3.1.2
-* SilverStripe cms >3.1.2
+* SilverStripe framework >3.2
+* SilverStripe cms >3.2
 
 ## Version
-1.1
+1.2-dev
+
+## NOTES on dev version
+Started updating for SS3.2. 
+**Still to do**
+Correct Sort on Initial Upload/Add. On Add, item will show at bottom of list but will have a SortOrder of 0, so it will move to top.
 
 ## Documentation
 Very simple gallery solution to upload images and display them in a basic gallery using Fancybox. 
