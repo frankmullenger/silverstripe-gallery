@@ -16,7 +16,7 @@ Frank Mullenger
 ## NOTES on dev version
 Started updating for SS3.2. 
 **Still to do**
-Correct Sort on Initial Upload/Add. On Add, item will show at bottom of list but will have a SortOrder of 0, so it will move to top.
+Clean Up code and More Testing
 
 ## Documentation
 Very simple gallery solution to upload images and display them in a basic gallery using Fancybox. 
