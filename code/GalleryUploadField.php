@@ -93,8 +93,9 @@ class GalleryUploadField extends UploadField {
 			THIRDPARTY_DIR . '/jquery-fileupload/jquery.fileupload.js',
 			THIRDPARTY_DIR . '/jquery-fileupload/jquery.fileupload-ui.js',
 			FRAMEWORK_DIR . '/javascript/UploadField_uploadtemplate.js',
-			FRAMEWORK_DIR . '/javascript/UploadField_downloadtemplate.js',
+			'gallery/javascript/GalleryUploadField_downloadtemplate.js',
 			FRAMEWORK_DIR . '/javascript/UploadField.js',
+			
 		));
 
 		Requirements::javascript(THIRDPARTY_DIR . '/jquery/jquery.js');
@@ -211,6 +212,59 @@ class GalleryUploadField extends UploadField {
 			}
 		}
 	}
+
+	public function getSortList() {
+		$list = $_POST['Images'];
+		return empty($list) ? array() : $list;
+	}
+
+	public function saveInto(DataObjectInterface $record) {
+		//error_log('start saveInto');
+		// Check required relation details are available
+		$fieldname = $this->getName();
+		if(!$fieldname) return $this;
+
+		// Get details to save
+		$idList = $this->getItemIDs();
+		$sortList = $this->getSortList();
+
+		// Check type of relation
+		$relation = $record->hasMethod($fieldname) ? $record->$fieldname() : null;
+		if($relation && ($relation instanceof RelationList || $relation instanceof UnsavedRelationList)) {
+			// has_many or many_many
+			$relation->setByIDList($idList);
+
+			$order = 1;
+
+			if ($sortList && is_array($sortList)) foreach ($sortList['Files'] as $fileID) {
+
+				$table = $relation->joinTable;
+				$parentID = $record->ID;
+				$parentField = $relation->foreignKey;
+				$componentField = $relation->localKey;
+
+				$joinObj = $table::get()
+					->where("\"$parentField\" = '{$parentID}' AND \"$componentField\" = '{$fileID}'")
+					->first();
+
+				if (!$joinObj || !$joinObj->exists()) {
+					$joinObj = $table::create();
+					$joinObj->$parentField = $parentID;
+					$joinObj->$componentField = $fileID;
+					$joinObj->write();
+				}
+
+				$joinObj->SortOrder = $order;
+				$joinObj->write();
+				$order++;
+			}
+
+		} elseif($record->hasOneComponent($fieldname)) {
+			// has_one
+			$record->{"{$fieldname}ID"} = $idList ? reset($idList) : 0;
+		}
+		return $this;
+	}
 	
 	/**
 	* Determines if the underlying record (if any) has a relationship
@@ -226,7 +280,7 @@ class GalleryUploadField extends UploadField {
 			&& ($record->has_one($fieldName) || $record->has_many($fieldName) || $record->many_many($fieldName))
 		);
 	}
-	
+
 	/**
 	 * Need to call Gallery_PageExtension::OrderedImages() to get correct order
 	 * of images, cannot declare Imates() method in extension it won't be used
@@ -244,7 +298,7 @@ class GalleryUploadField extends UploadField {
 			// then we should inspect this instead for the form values
 			if(($record instanceof DataObject) && $record->hasMethod('OrderedImages')) {
 				// If given a dataobject use reflection to extract details
-				
+
 				$data = $record->OrderedImages();
 				if($data instanceof DataObject) {
 					// If has_one, add sole item to default list
@@ -262,8 +316,8 @@ class GalleryUploadField extends UploadField {
 			$class = $this->getRelationAutosetClass();
 			$items = DataObject::get($class)->byIDs($value['Files']);
 		}
-		
-		// If javascript is disabled, direct file upload (non-html5 style) can 
+
+		// If javascript is disabled, direct file upload (non-html5 style) can
 		// trigger a single or multiple file submission. Note that this may be
 		// included in addition to re-submitted File IDs as above, so these
 		// should be added to the list instead of operated on independently.
@@ -277,7 +331,7 @@ class GalleryUploadField extends UploadField {
 				}
 			}
 		}
-		
+
 		// Filter items by what's allowed to be viewed
 		$filteredItems = new ArrayList();
 		$fileIDs = array();
@@ -287,7 +341,7 @@ class GalleryUploadField extends UploadField {
 				$fileIDs[] = $file->ID;
 			}
 		}
-		
+
 		// Filter and cache updated item list
 		$this->items = $filteredItems;
 		// Same format as posted form values for this field. Also ensures that
