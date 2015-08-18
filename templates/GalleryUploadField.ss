@@ -8,6 +8,7 @@
 				</span></div>
 				<div class="ss-uploadfield-item-info">
 					<input type='hidden' value='$ID' name='{$Top.Name}[Files][]' />
+					<input type='hidden' value='$SortOrder' name='{$Top.Name}[Sort][]' />
 					<label class="ss-uploadfield-item-name">
 						<span class="name">$Name.XML</span>
 						<span class="size">$Size</span>
