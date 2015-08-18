@@ -1,6 +1,5 @@
 ;(function($) {
 	$.entwine('gallery', function($){
-
 		$('.galleryfield-files').entwine({
 			onmatch : function() {
 				var self = this;
@@ -38,4 +37,5 @@
 		});
 
 	});
+	
 }(jQuery));

@@ -62,6 +62,4 @@ class Gallery_ImageExtension extends DataExtension {
 		));
 		return $fields;
 	}
-	
-
 }
