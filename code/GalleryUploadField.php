@@ -73,7 +73,7 @@ class GalleryUploadField extends UploadField {
 		// allowedMaxFileNumber has not been set, it's wanted to be 1
 		if($record 
 			&& $record->exists()
-			&& $record->has_one($name) 
+			&& $record->hasOne($name)
 			&& !$this->getConfig('allowedMaxFileNumber')
 		) {
 			$this->setConfig('allowedMaxFileNumber', 1);
@@ -166,7 +166,7 @@ class GalleryUploadField extends UploadField {
 		$record = $this->getRecord();
 		$relName = $this->getName();
 		$parentID = $record->ID;
-		list($parentClass, $componentClass, $parentField, $componentField, $table) = $record->many_many($relName);
+		list($parentClass, $componentClass, $parentField, $componentField, $table) = $record->manyMany($relName);
 
 		if ($fileIDs && is_array($fileIDs)) foreach ($fileIDs as $order => $fileID) {
 			$newOrder = $order + 1;
@@ -191,10 +191,10 @@ class GalleryUploadField extends UploadField {
 
 		$record = $this->getRecord();
 		$name = $this->getName();
-		list($parentClass, $componentClass, $parentField, $componentField, $table) = $record->many_many($name);
+		list($parentClass, $componentClass, $parentField, $componentField, $table) = $record->manyMany($name);
 		
 		if ($record && $record->exists()) {
-			if ($record->has_many($name) || $record->many_many($name)) {
+			if ($record->has_many($name) || $record->manyMany($name)) {
 				if(!$record->isInDB()) $record->write();
 
 				//Set the sort order first time image is attached
@@ -206,20 +206,24 @@ class GalleryUploadField extends UploadField {
 
 				$record->{$name}()->add($file, array('SortOrder' => $top));
 				
-			} elseif($record->has_one($name)) {
+			} elseif($record->hasOne($name)) {
 				$record->{$name . 'ID'} = $file->ID;
 				$record->write();
 			}
 		}
 	}
 
-	public function getSortList() {
+
+    /**
+     * Get the SORTED list of file IDs from the $_POST
+     * @return array
+     */
+    public function getSortList() {
 		$list = $_POST['Images'];
 		return empty($list) ? array() : $list;
 	}
 
 	public function saveInto(DataObjectInterface $record) {
-		//error_log('start saveInto');
 		// Check required relation details are available
 		$fieldname = $this->getName();
 		if(!$fieldname) return $this;
@@ -277,13 +281,13 @@ class GalleryUploadField extends UploadField {
 		$fieldName = $this->getName();
 		return (
 			$record 
-			&& ($record->has_one($fieldName) || $record->has_many($fieldName) || $record->many_many($fieldName))
+			&& ($record->hasOne($fieldName) || $record->hasMany($fieldName) || $record->manyMany($fieldName))
 		);
 	}
 
 	/**
 	 * Need to call Gallery_PageExtension::OrderedImages() to get correct order
-	 * of images, cannot declare Imates() method in extension it won't be used
+	 * of images, cannot declare Images() method in extension it won't be used
 	 */
 	public function setValue($value, $record = null) {
 
@@ -422,7 +426,7 @@ class GalleryUploadField_ItemHandler extends UploadField_ItemHandler {
 			->where("\"SiteTree\".\"ID\" = '$parentID'")
 			->first();
 
-		list($parentClass, $componentClass, $parentField, $componentField, $table) = $record->many_many('Images');
+		list($parentClass, $componentClass, $parentField, $componentField, $table) = $record->manyMany('Images');
 
 		$joinObj = $table::get()
 				->where("\"$parentField\" = '{$parentID}' AND \"ImageID\" = '{$file->ID}'")
@@ -444,7 +448,8 @@ class GalleryUploadField_ItemHandler extends UploadField_ItemHandler {
 
 		// Check item permissions
 		$item = $this->getItem();
-		if(!$item) return $this->httpError(404);
+		if(!$item) /** @noinspection PhpVoidFunctionResultUsedInspection */
+            return $this->httpError(404);
 		if(!$item->canEdit()) return $this->httpError(403);
 
 		// Only allow actions on files in the managed relation (if one exists)
@@ -455,7 +460,7 @@ class GalleryUploadField_ItemHandler extends UploadField_ItemHandler {
 		$record = $this->parent->getRecord();
 		$relName = $this->parent->getName();
 		$parentID = $record->ID;
-		list($parentClass, $componentClass, $parentField, $componentField, $table) = $record->many_many($relName);
+		list($parentClass, $componentClass, $parentField, $componentField, $table) = $record->manyMany($relName);
 
 		$joinObj = $table::get()
 				->where("\"$parentField\" = '{$parentID}' AND \"$componentField\" = '{$item->ID}'")
