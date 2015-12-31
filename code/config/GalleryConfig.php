@@ -7,7 +7,8 @@
  * The static variables are called by Gallery Page Controller on initilisation
  *
  */
-class GalleryConfig extends Object {
+class GalleryConfig extends Object
+{
     /**
      * Max width of the gallery image
      *
@@ -67,7 +68,8 @@ class GalleryConfig extends Object {
      * @param $width width of the images
      * @param $height height of the images
      */
-    public static function setDimensions($width, $height) {
+    public static function setDimensions($width, $height)
+    {
         self::config()->width = $width;
         self::config()->height = $height;
     }
@@ -78,7 +80,8 @@ class GalleryConfig extends Object {
      * @param $width width of the images
      * @param $height height of the images
      */
-    public static function setThumbDimensions($width, $height) {
+    public static function setThumbDimensions($width, $height)
+    {
         self::config()->thumb_width = $width;
         self::config()->thumb_height = $height;
     }
@@ -88,27 +91,33 @@ class GalleryConfig extends Object {
      *
      * @param $width width of the images
      */
-    public static function setResizeType($type) {
+    public static function setResizeType($type)
+    {
         self::config()->resize_type = $type;
     }
 
-    public static function getWidth() {
+    public static function getWidth()
+    {
         return self::config()->width;
     }
 
-    public static function getHeight() {
+    public static function getHeight()
+    {
         return self::config()->height;
     }
 
-    public static function getThumbWidth() {
+    public static function getThumbWidth()
+    {
         return self::config()->thumb_width;
     }
 
-    public static function getThumbHeight() {
+    public static function getThumbHeight()
+    {
         return self::config()->thumb_height;
     }
 
-    public static function getResizeType() {
+    public static function getResizeType()
+    {
         return self::config()->resize_type;
     }
 }

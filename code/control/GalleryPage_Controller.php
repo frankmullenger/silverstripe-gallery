@@ -1,6 +1,8 @@
 <?php
-class GalleryPage_Controller extends Page_Controller {
-    public function init() {
+class GalleryPage_Controller extends Page_Controller
+{
+    public function init()
+    {
         parent::init();
     }
 
@@ -10,8 +12,9 @@ class GalleryPage_Controller extends Page_Controller {
      *
      * @return String
      */
-    public function Gallery() {
-        if($this->Images()->exists()) {
+    public function Gallery()
+    {
+        if ($this->Images()->exists()) {
             $vars = array(
                 'HideDescription' => $this->HideDescription,
                 'Images' => $this->Images()->sort('SortOrder'),
@@ -19,8 +22,9 @@ class GalleryPage_Controller extends Page_Controller {
                 'Height' => GalleryConfig::config()->height
             );
 
-            return $this->renderWith('Gallery',$vars);
-        } else
+            return $this->renderWith('Gallery', $vars);
+        } else {
             return "";
+        }
     }
 }

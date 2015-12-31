@@ -1,6 +1,7 @@
 <?php
 
-class GalleryPage extends Page {
+class GalleryPage extends Page
+{
     private static $icon = "gallery/images/gallery.png";
 
     private static $db = array(
@@ -20,11 +21,13 @@ class GalleryPage extends Page {
      *
      * @return ArrayList
      */
-    public function SortedImages(){
+    public function SortedImages()
+    {
         return $this->Images()->Sort('SortOrder');
     }
 
-    public function getCMSFields() {
+    public function getCMSFields()
+    {
         $fields = parent::getCMSFields();
 
         $fields->removeByName('HideDescription');
@@ -42,7 +45,8 @@ class GalleryPage extends Page {
         return $fields;
     }
 
-    public function getSettingsFields() {
+    public function getSettingsFields()
+    {
         $fields = parent::getSettingsFields();
 
         $gallery = FieldGroup::create(
@@ -53,5 +57,4 @@ class GalleryPage extends Page {
 
         return $fields;
     }
-
 }

@@ -1,15 +1,18 @@
 <?php
 
-class GalleryImage extends DataExtension {
+class GalleryImage extends DataExtension
+{
     private static $belogs_many_many = array(
         'Gallery'   => 'GalleryPage'
     );
 
-    public function __construct() {
+    public function __construct()
+    {
         parent::__construct();
     }
 
-    public function GalleryImage() {
+    public function GalleryImage()
+    {
         $resize_type = GalleryConfig::getResizeType();
         $width = GalleryConfig::config()->width;
         $height = GalleryConfig::config()->height;
@@ -18,24 +21,24 @@ class GalleryImage extends DataExtension {
 
         switch ($resize_type) {
             case 'crop':
-                $img = $this->owner->croppedImage($width,$height);
+                $img = $this->owner->croppedImage($width, $height);
                 break;
             case 'pad':
-                $img = $this->owner->paddedImage($width,$height,$background);
+                $img = $this->owner->paddedImage($width, $height, $background);
                 break;
             case 'ratio':
-                $img = $this->owner->SetRatioSize($width,$height);
+                $img = $this->owner->SetRatioSize($width, $height);
                 break;
         }
 
         return $img;
     }
 
-    public function GalleryThumbnail() {
+    public function GalleryThumbnail()
+    {
         $width = GalleryConfig::config()->thumb_width;
         $height = GalleryConfig::config()->thumb_height;
 
-        return $this->owner->croppedImage($width,$height);
-
+        return $this->owner->croppedImage($width, $height);
     }
 }
