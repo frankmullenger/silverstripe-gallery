@@ -15,25 +15,15 @@ class Gallery_PageExtension extends DataExtension {
 		));
 	}
 	
-	public function OrderedImages() {
+	public function OrderedImages($sort='DESC') {
 
 		list($parentClass, $componentClass, $parentField, $componentField, $table) = $this->owner->many_many('Images');
-		
-		$images = $this->owner->Images();
-		$orderdedimages = ArrayList::create();
-		$mergeTable = $table::get()->filter(array($parentField => $this->owner->ID));
-		if($images->exists()) {
-			
-			foreach ($images as $image) {
-				$mergeItem = $mergeTable->find($componentField, $image->ID);
-				$image->SortOrder = $mergeItem->SortOrder;
-				$image->Caption = $mergeItem->Caption;
-				
-				$orderdedimages->add($image);
-			}
-		}
 
-		return $orderdedimages->sort('SortOrder');
+		return $this->owner->getManyManyComponents(
+			'Images',
+			'',
+			"\"{$table}\".\"SortOrder\" {$sort}"
+		);
 	}
 }
 
@@ -61,5 +51,24 @@ class Gallery_ImageExtension extends DataExtension {
 			'Dimensions'
 		));
 		return $fields;
+	}
+	
+	public function Caption() {
+
+		//TODO: Refactor so doesn't query database each time
+		$controller = Controller::curr();
+		$page = $controller->data();
+		list($parentClass, $componentClass, $parentField, $componentField, $table) = $page->many_many('Images');
+
+                // check if page return many_many Images when not $table is not a object
+                if(is_object($table)) {
+                    $joinObj = $table::get()
+                            ->where("\"{$parentField}\" = '{$page->ID}' AND \"ImageID\" = '{$this->owner->ID}'")
+                            ->first();
+
+                    return $joinObj->Caption;
+                }
+                
+                return false;
 	}
 }
